@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="CRUDForge : CRUDForge Project: Make SOLID Data" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>CRUDForge</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/wagnerpinheiro/crudforge">View on GitHub</a>
+
+          <h1 id="project_title">CRUDForge</h1>
+          <h2 id="project_tagline">CRUDForge Project: Make SOLID Data</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/wagnerpinheiro/crudforge/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/wagnerpinheiro/crudforge/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>CRUDForge Project: Make SOLID Data</h1>
+
+<p>Plataforma para gestão de dados de forma colaborativa e extensível de alto nível:</p>
+
+<ol>
+<li>Compartilhamento de Schemas <a href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a>;</li>
+<li>Compartilhamento de dados;</li>
+<li>Sistema de gestão para PME (pequenas e médias empresas), altamente customizado e de acordo com as necessidades;</li>
+</ol><h2>Contexto</h2>
+
+<h3>Visão</h3>
+
+<ul>
+<li>subir o nível de abstração para o desenvolvimento de aplicativos online e com funcionalidades prontas de ERP; </li>
+<li>usuário final: 
+
+<ol>
+<li>qualquer pessoa que queira estruturar e compartilhar dados;</li>
+<li>gestor de PME que conhece o seu negócio, e que por restrições financeiras ou operacionais não tenha interesse em um ERP, mas quer ir alem do que gerenciar o seu negócio apenas com planilhas, alguém que queira gerar um diferencial competitivo, disponibilizando dados para os seus clientes e aumentando a produtividade em um ambiente multi-usuário descentralizado e controlado;</li>
+</ol>
+</li>
+<li>o CRUDForge não tem a intenção de ser um ERP, pois o usuário final em seu contexto comercial, é o gestor que entende do seu negócio e nesse caso não faz sentido provermos uma solução rígida que ele deve seguir para obter resultados, ao invés disso queremos prover uma plataforma para que ele desenvolva ou seus conceitos livremente, sem ficar atado ao que já existe. Não queremos moldar o usuário, e sim moldar uma infraestrutura sólida de apoio para os seus negócios.</li>
+</ul><h3>Conceitos</h3>
+
+<ul>
+<li>KISS, DRY, SOLID (mantenha simples, não se repita, manter e estender de forma simples);</li>
+<li>implementar CRUD e Relatórios para que o usuário final realize o desenvolvimento RAD e gere aplicações RIA;</li>
+</ul><h3>TCC</h3>
+
+<p>O CRUDForge é a idealização de um projeto para o TCC do curso de Engenharia da Computação.
+Considerações:</p>
+
+<ul>
+<li>foco na arquitetura da plataforma:
+
+<ul>
+<li>especificação e integração dos serviços, frameworks e bibliotecas;</li>
+<li>aquitetura SOA;</li>
+</ul>
+</li>
+<li>apoiado sobre a engenharia de software:
+
+<ul>
+<li>gestão de projeto;</li>
+<li>desenvolvimento ágil;</li>
+<li>modelagem UML;</li>
+<li>testes;</li>
+</ul>
+</li>
+</ul><p>O CRUDForge não é:</p>
+
+<ul>
+<li>Um aplicativo;</li>
+<li>Um plugin;</li>
+<li>Uma blibioteca;</li>
+<li>Um framework;</li>
+<li>Um ERP;</li>
+</ul><p>CRUDForge é uma <a href="http://webinsider.uol.com.br/2012/03/01/plataforma-de-software-voce-ainda-vai-usar-uma/">plataforma</a> de implantação simples via <a href="http://en.wikipedia.org/wiki/Virtual_appliance">Virtual Appliance</a>. Sendo este virtual appliance um protótipo que será entregue ao final do TCC, junto com as especificações e o desenvolvimento dos conceitos por trás da plataforma.</p>
+
+<h3>Casos de uso</h3>
+
+<ol>
+<li>TO-DO list: Imagine que você queira montar uma lista de tarefas e compartilhar com a sua familia, para isso você define o CRUD através de uma interface amigavel e cria um relatorio para que as pessoas dentro do seu ACL possam ver essas tarefas. Você pode criar um campo chamado categoria, onde dependendo do seu valor os usuarios dentro do seu ACL terão ou não a visibilidade daquela tarefa;</li>
+<li>Compartilhamento de inventario: Pode ser montado um CRUD para você lançar as informações que quiser por exemplo da sua coleção de DVD e a partir dele cria-se um relatorio através de um template onde será publicado um pagina publica, onde qualquer amigo seu possa ver quais os DVDs você possui;</li>
+<li>Contas a pagar e receber: CRUD para implementar um controle de contas a pagar e receber basico utilizado em qualquer empresa. O usuário pode estender esse CRUD adicionando campos que fazem sentido para a empresa dele ou removendo outros campos;</li>
+<li>Controle básico de estoque: CRUD para o lançamento de baixa e controle de estoque;</li>
+<li>Gestão simples de varejo: Tendo os modulos 3 e 4 disponiveis, o usuario pode agregar esses schemas (dentre outros) na sua conta e com isso montar um pequeno sistema de gestão para a sua loja de varejo;</li>
+</ol>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">CRUDForge maintained by <a href="https://github.com/wagnerpinheiro">wagnerpinheiro</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-39553392-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
