@@ -1,6 +1,21 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "name": "crudforge/crudforge",
+    "description": "CRUDForge Project",
+    "license": "MIT",
+    "authors": [
+		{
+			"name": "Livar Hora"
+		},
+		{
+			"name": "Victor Arpa Bock"
+		},  
+		{
+			"name": "Wagner Pinheiro"
+		},
+		{
+			"name": "Willian Carareto"
+		}
+    ],
     "autoload": {
         "psr-0": { "": "src/" }
     },
@@ -21,6 +36,7 @@
         "kriswallsmith/assetic": "1.1.*@dev"
     },
     "scripts": {
+		"pre-install-cmd": "./bin/install-backend.sh",
         "post-install-cmd": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
