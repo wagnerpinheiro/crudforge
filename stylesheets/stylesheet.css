@@ -374,6 +374,18 @@ Full-Width Styles
   background: #212121;
 }
 
+.logo{
+	width: 90px;
+	height: 90px;
+	border: none 0px !important;
+	position: absolute;
+	left: -101px;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  -ms-box-shadow: non !important;
+}
 
 
 /*******************************************************************************
