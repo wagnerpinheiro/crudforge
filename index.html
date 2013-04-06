@@ -7,6 +7,79 @@
     <meta name="description" content="CRUDForge Project: Make SOLID Data" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+  	
+	<script>
+	$(function() {
+		$(document).tooltip({
+		  items: '[data-wikipedia]',
+		  //tooltipClass:'preview-tip',
+          content: function(callback) {
+		    var element = $(this);
+		    var text = element.attr('data-wikipedia');			
+			var url="http://en.wikipedia.org/w/api.php?action=parse&format=json&page=" + text+"&redirects&prop=text&callback=?";
+			  $.getJSON(url,function(data){
+ 				  wikiHTML = data.parse.text["*"];
+				  //console.log(wikiHTML);
+				  callback(wikiHTML);					
+			  });		          
+		  }
+		});
+	  });
+  </script>
+
+<style>
+.ui-tooltip {    
+    border-radius: 5px;
+    font: x-small "Helvetica Neue", Sans-Serif;
+    box-shadow: 0 0 7px black;
+	max-width: 640px;	
+}
+
+.ui-tooltip h2{
+	font: bold x-small "Helvetica Neue", Sans-Serif;
+}
+
+.ui-tooltip .mw-headline{
+	font: bold x-small "Helvetica Neue", Sans-Serif;
+}
+
+.ui-tooltip .dablink{
+	display: none;
+}
+
+.ui-tooltip .editsection{
+	display: none;
+}
+
+.ui-tooltip .toc{
+	display: none;
+}
+
+.ui-tooltip .vertical-navbox{
+	display: none;
+}
+
+.ui-tooltip .ambox-Refimprove{
+	display: none;
+}
+
+.ui-tooltip .ambox-Original_research{
+	display: none;
+}
+
+
+.ui-tooltip .seealso{
+	display: none;
+}
+
+.ui-tooltip img{
+	display: none;
+}
+
+</style>
 
     <title>CRUDForge</title>
   </head>
@@ -37,7 +110,7 @@
 <p>Plataforma para gestão de dados de forma colaborativa e extensível de alto nível:</p>
 
 <ol>
-<li>Compartilhamento de Schemas <a href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a>;</li>
+<li>Compartilhamento de Schemas <a target="_blank" href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete" data-wikipedia="Create,_read,_update_and_delete">CRUD</a>;</li>
 <li>Compartilhamento de dados;</li>
 <li>Sistema de gestão para PME (pequenas e médias empresas), altamente customizado e de acordo com as necessidades;</li>
 </ol><h2>Contexto</h2>
@@ -45,7 +118,7 @@
 <h3>Visão</h3>
 
 <ul>
-<li>subir o nível de abstração para o desenvolvimento de aplicativos online e com funcionalidades prontas de ERP; </li>
+<li>subir o nível de abstração para o desenvolvimento de aplicativos online e com funcionalidades prontas de <a target="_blank" href="http://en.wikipedia.org/wiki/Enterprise_resource_planning" data-wikipedia="Enterprise_resource_planning">ERP</a>; </li>
 <li>usuário final: 
 
 <ol>
@@ -57,8 +130,8 @@
 </ul><h3>Conceitos</h3>
 
 <ul>
-<li><a haref="http://en.wikipedia.org/wiki/KISS_principle">KISS</a>, <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>, <a href="http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)">SOLID</a> (mantenha simples, não se repita, manter e estender de forma simples);</li>
-<li>implementar CRUD e Relatórios para que o usuário final realize o desenvolvimento RAD e gere aplicações RIA;</li>
+<li><a target="_blank" haref="http://en.wikipedia.org/wiki/KISS_principle" data-wikipedia="KISS_principle">KISS</a>, <a target="_blank" href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself" data-wikipedia="Don%27t_repeat_yourself">DRY</a>, <a target="_blank" href="http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)" data-wikipedia="SOLID_(object-oriented_design)">SOLID</a> (mantenha simples, não se repita, manter e estender de forma simples);</li>
+<li>implementar CRUD e Relatórios para que o usuário final realize o desenvolvimento <a target="_blank" href="http://en.wikipedia.org/wiki/Rapid_application_development" data-wikipedia="Rapid_application_development">RAD</a> e gere aplicações <a target="_blank" href="http://en.wikipedia.org/wiki/Rich_Internet_application" data-wikipedia="Rich_Internet_application">RIA</a>;</li>
 </ul><h3>TCC</h3>
 
 <p>O CRUDForge é a idealização de um projeto para o TCC do curso de Engenharia da Computação.
@@ -89,7 +162,7 @@ Considerações:</p>
 <li>Uma biblioteca;</li>
 <li>Um framework;</li>
 <li>Um ERP;</li>
-</ul><p>CRUDForge é uma <a href="http://webinsider.uol.com.br/2012/03/01/plataforma-de-software-voce-ainda-vai-usar-uma/">plataforma</a> de implantação simples via <a href="http://en.wikipedia.org/wiki/Virtual_appliance">Virtual Appliance</a>. Sendo este virtual appliance um protótipo que será entregue ao final do TCC, junto com as especificações e o desenvolvimento dos conceitos por trás da plataforma.</p>
+</ul><p>CRUDForge é uma <a target="_blank" href="http://webinsider.uol.com.br/2012/03/01/plataforma-de-software-voce-ainda-vai-usar-uma/">plataforma</a> de implantação simples via <a target="_blank" href="http://en.wikipedia.org/wiki/Virtual_appliance" data-wikipedia="Virtual_appliance">Virtual Appliance</a>. Sendo este virtual appliance um protótipo que será entregue ao final do TCC, junto com as especificações e o desenvolvimento dos conceitos por trás da plataforma.</p>
 
 <h3>Casos de uso</h3>
 

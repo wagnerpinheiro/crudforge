@@ -387,6 +387,11 @@ Full-Width Styles
   -ms-box-shadow: non !important;
 }
 
+.preview-tip{
+	font-size: xx-small;
+	width: 320px;
+}
+
 
 /*******************************************************************************
 Small Device Styles
