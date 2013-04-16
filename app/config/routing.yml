@@ -1,3 +1,8 @@
+crudforge:
+    resource: "@CrudforgeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 # Internal routing configuration to handle ESI
 # ****** WARNING ******
 # This route should be enabled with caution as it can open a security vulnerability
