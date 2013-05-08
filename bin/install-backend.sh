@@ -16,16 +16,6 @@ echo -e "${yellow}Git installed${NC}"
 #install LAMP Server
 sudo apt-get install lamp-server^
 echo -e "${yellow}LAMP installed${NC}"
-#install MongoDB
-#versao do repositorio do ubuntu e mais antiga
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-sudo sh -c 'echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" > /etc/apt/sources.list.d/10gen.list'
-sudo apt-get update
-sudo apt-get install mongodb-10gen 
-sudo apt-get install php5-dev php5-cli php-pear php5-mongo
-sudo pecl install mongo
-sudo sh -c 'echo "extension=mongo.so" >> /etc/php5/cli/php.ini'
-echo -e "${yellow}MongoDB installed${NC}"
 #install composer
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
