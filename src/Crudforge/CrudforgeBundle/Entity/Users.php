@@ -3,6 +3,7 @@
 namespace Crudforge\CrudforgeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Users
@@ -34,6 +35,21 @@ class Users
      * @ORM\Column(name="password", type="string", length=40)
      */
     private $password;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Document", mappedBy="user")
+     */
+    protected $documents;
+
+    public function __construct()
+    {
+        $this->documents = new ArrayCollection();
+    }
+
+    public function __toString(){
+        return $this->getUsername();
+    }
 
 
     /**
@@ -90,5 +106,38 @@ class Users
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Add documents
+     *
+     * @param \Crudforge\CrudforgeBundle\Entity\Document $documents
+     * @return Users
+     */
+    public function addDocument(\Crudforge\CrudforgeBundle\Entity\Document $documents)
+    {
+        $this->documents[] = $documents;
+    
+        return $this;
+    }
+
+    /**
+     * Remove documents
+     *
+     * @param \Crudforge\CrudforgeBundle\Entity\Document $documents
+     */
+    public function removeDocument(\Crudforge\CrudforgeBundle\Entity\Document $documents)
+    {
+        $this->documents->removeElement($documents);
+    }
+
+    /**
+     * Get documents
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
     }
 }
