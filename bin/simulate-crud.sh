@@ -14,9 +14,8 @@ read -p "Digite a senha do usuario root do mysql: " SENHA
 sed -i "s/database_password\:.*/database_password\: $SENHA/g" app/config/parameters.yml
 echo -e "${yellow}Aperte ENTER nas proximas perguntas ate o ponto que o servidor estiver rodando na porta 8000${NC}"
 app/console doctrine:database:create
-# @todo: o update nao esta funcionando quando roda pelo script, apenas quando roda manual
-app/console doctrine:schema:update --force
 app/console doctrine:generate:entity --entity=CrudforgeBundle:Simulation --fields='title:string(255) body:text' --format=annotation
+app/console doctrine:schema:update --force
 app/console generate:doctrine:crud --entity=CrudforgeBundle:Simulation --format=annotation --with-write --no-interaction
 echo -e "${red}Abra o seu navegador no endereco: http://localhost:8000/simulation${NC}"
 app/console server:run
