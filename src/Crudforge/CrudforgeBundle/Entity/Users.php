@@ -4,6 +4,7 @@ namespace Crudforge\CrudforgeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
 
 /**
  * Users
@@ -49,6 +50,13 @@ class Users
 
     public function __toString(){
         return $this->getUsername();
+    }
+
+    /**
+     * @todo: #11 implementar criação do db no namespace do usuario 
+     */
+    public function generateDb(){
+
     }
 
 

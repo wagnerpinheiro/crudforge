@@ -4,6 +4,9 @@ namespace Crudforge\CrudforgeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Sensio\Bundle\GeneratorBundle\Generator\DoctrineEntityGenerator;
+use Sensio\Bundle\GeneratorBundle\Generator\DoctrineCrudGenerator;
+use Doctrine\Bundle\DoctrineBundle\Command\Proxy\UpdateSchemaDoctrineCommand;
 
 /**
  * Document
@@ -41,14 +44,30 @@ class Document
      */
     protected $fields;
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->fields = new ArrayCollection();
     }
 
     public function __toString(){
         return $this->getName();
     }
+
+    /**
+     * @todo: #11 implementar geração do CRUD
+     * ver: vendor/sensio/generator-bundle/Sensio/Bundle/GeneratorBundle/Command/GenerateDoctrineEntityCommand.php
+     */
+    public function generateCrud(){
+
+
+    }
+
+    /**
+     * @todo: #11 implementar atualização do CRUD
+     */
+    public function updateCrud(){
+
+    }
+
 
     /**
      * Get id
