@@ -13,6 +13,8 @@ blue='\e[0;34m'
 #install Git
 sudo apt-get install git
 echo -e "${yellow}Git installed${NC}"
+#install dependencies 
+sudo apt-get install curl
 #install LAMP Server
 sudo apt-get install lamp-server^
 echo -e "${yellow}LAMP installed${NC}"
@@ -23,8 +25,5 @@ echo -e "${yellow}Composer installed, use it: composer${NC}"
 cp app/config/parameters.yml.dist app/config/parameters.yml
 #post-install checklist
 echo -e "${blue}\n----------------------------------------------"
-echo -e "TO-DO:"
-echo -e " [X] add 'extension=mongo.so' in /etc/php5/cli/php.ini\n"
-echo -e " [ ] Configure mongodb in /etc/mongodb.conf\n"
 echo -e "${NC}"
 sleep 2
