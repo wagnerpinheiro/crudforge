@@ -36,6 +36,13 @@ class Fields
     private $type;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="length", type="integer", length=10)
+     */
+    private $length;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Document", inversedBy="fields")
      * @ORM\JoinColumn(name="document_id", referencedColumnName="id")
      */
@@ -123,5 +130,28 @@ class Fields
     public function getDocument()
     {
         return $this->document;
+    }
+
+    /**
+     * Set length
+     *
+     * @param integer $length
+     * @return Fields
+     */
+    public function setLength($length)
+    {
+        $this->length = $length;
+    
+        return $this;
+    }
+
+    /**
+     * Get length
+     *
+     * @return integer 
+     */
+    public function getLength()
+    {
+        return $this->length;
     }
 }

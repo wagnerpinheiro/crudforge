@@ -4,9 +4,12 @@ namespace Crudforge\CrudforgeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+
 use Sensio\Bundle\GeneratorBundle\Generator\DoctrineEntityGenerator;
+//use Symfony\Component\Filesystem\Filesystem;
+//use Doctrine\Bundle\DoctrineBundle\Command\Proxy\UpdateSchemaDoctrineCommand;
+use Doctrine\ORM\Tools\SchemaTool;
 use Sensio\Bundle\GeneratorBundle\Generator\DoctrineCrudGenerator;
-use Doctrine\Bundle\DoctrineBundle\Command\Proxy\UpdateSchemaDoctrineCommand;
 
 /**
  * Document
@@ -53,26 +56,9 @@ class Document
     }
 
     /**
-     * @todo: #11 implementar geração do CRUD
-     * ver: vendor/sensio/generator-bundle/Sensio/Bundle/GeneratorBundle/Command/GenerateDoctrineEntityCommand.php
-     */
-    public function generateCrud(){
-
-
-    }
-
-    /**
-     * @todo: #11 implementar atualização do CRUD
-     */
-    public function updateCrud(){
-
-    }
-
-
-    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -88,14 +74,14 @@ class Document
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -111,14 +97,14 @@ class Document
     public function setUser(\Crudforge\CrudforgeBundle\Entity\Users $user = null)
     {
         $this->user = $user;
-    
+
         return $this;
     }
 
     /**
      * Get user
      *
-     * @return \Crudforge\CrudforgeBundle\Entity\Users 
+     * @return \Crudforge\CrudforgeBundle\Entity\Users
      */
     public function getUser()
     {
@@ -134,7 +120,7 @@ class Document
     public function addField(\Crudforge\CrudforgeBundle\Entity\Fields $fields)
     {
         $this->fields[] = $fields;
-    
+
         return $this;
     }
 
@@ -151,7 +137,7 @@ class Document
     /**
      * Get fields
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFields()
     {

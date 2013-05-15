@@ -196,4 +196,24 @@ class DocumentController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Generate CRUD.
+     *
+     * @Route("/{id}/generateCrud", name="generate_crud")
+     * @Template()
+     */
+    public function generateCrudAction(Request $request, $id){
+
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('CrudforgeBundle:Document')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Document entity.');
+        }
+        $core = $this->get('crudforge_core');
+        $core->generateCrud($entity);;
+
+        return $this->redirect($this->generateUrl('document'));
+    }
 }

@@ -39,3 +39,8 @@ rm src/Crudforge/CrudforgeBundle/Form/SimulationType.php
 rm src/Crudforge/CrudforgeBundle/Resources/views/Simulation/*
 rm src/Crudforge/CrudforgeBundle/Tests/Controller/SimulationControllerTest.php
 app/console generate:doctrine:crud --entity=CrudforgeBundle:Simulation --format=annotation --with-write --no-interaction
+
+
+#outros
+#gera getters e setters
+app/console doctrine:generate:entities Crudforge/CrudforgeBundle/Entity/Document
