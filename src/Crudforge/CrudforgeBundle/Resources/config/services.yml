@@ -1,6 +1,9 @@
 ## YAML Template.
 ---
+parameters:
+    crudforge_core.class: Crudforge\CrudforgeBundle\CrudforgeCore\GenerateCrud
+    
 services:
     crudforge_core:
-        class:        "Crudforge\CrudforgeBundle\CrudforgeCore\GenerateCrud"
-        #arguments:    [document]
+        class:        "%crudforge_core.class%"
+        

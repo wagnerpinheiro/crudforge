@@ -210,9 +210,11 @@ class DocumentController extends Controller
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Document entity.');
-        }
+        }        
+        /** @var GenerateCrud  */
         $core = $this->get('crudforge_core');
-        $core->generateCrud($entity);;
+        $core->setDocument($entity);
+        $core->execute();
 
         return $this->redirect($this->generateUrl('document'));
     }

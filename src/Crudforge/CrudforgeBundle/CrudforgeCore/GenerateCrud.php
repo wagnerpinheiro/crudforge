@@ -2,6 +2,13 @@
 namespace Crudforge\CrudforgeBundle\CrudforgeCore;
 use Crudforge\CrudforgeBundle\Entity\Document;
 
+use Sensio\Bundle\GeneratorBundle\Generator\DoctrineEntityGenerator;
+//use Symfony\Component\Filesystem\Filesystem;
+//use Doctrine\Bundle\DoctrineBundle\Command\Proxy\UpdateSchemaDoctrineCommand;
+use Doctrine\ORM\Tools\SchemaTool;
+use Sensio\Bundle\GeneratorBundle\Generator\DoctrineCrudGenerator;
+use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
+
 
 /**
  * Description of GenerateCrud
@@ -12,8 +19,12 @@ class GenerateCrud {
 
     protected $document;
 
-    public function __construct(Document $document){
-        $this->document = $document;
+    public function __construct(){
+       
+    }
+    
+    public function setDocument(Document $document){
+         $this->document = $document;        
     }
 
     public function execute(){

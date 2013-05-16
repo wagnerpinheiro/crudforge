@@ -13,6 +13,7 @@ class FieldsType extends AbstractType
         $builder
             ->add('name')
             ->add('type')
+            ->add('length')
             ->add('document')
         ;
     }
