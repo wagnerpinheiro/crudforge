@@ -2,8 +2,9 @@
 ---
 parameters:
     crudforge_core.class: Crudforge\CrudforgeBundle\CrudforgeCore\GenerateCrud
-    
+
 services:
     crudforge_core:
         class:        "%crudforge_core.class%"
-        
+        arguments: ['@service_container']
+
