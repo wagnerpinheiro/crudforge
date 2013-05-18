@@ -25,5 +25,10 @@ echo -e "${yellow}Composer installed, use it: composer${NC}"
 cp app/config/parameters.yml.dist app/config/parameters.yml
 #post-install checklist
 echo -e "${blue}\n----------------------------------------------"
+echo -e "TO-DO:"
+echo -e " 1. set mysql passowrd in app/config/parameters.yml"
+echo -e " 2. create database: app/console doctrine:database:create"
+echo -e " 3. update database schema: app/console doctrine:schema:update --force"
+echo -e " 4. run demo server: app/console server:run"
 echo -e "${NC}"
 sleep 2
