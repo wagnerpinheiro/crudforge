@@ -1,4 +1,6 @@
-<h1>Fields creation</h1>
+{% extends '::base.html.twig' %}
+{% block body %}
+<h2>Fields creation</h2>
 
 <form action="{{ path('fields_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
@@ -14,3 +16,4 @@
         </a>
     </li>
 </ul>
+{% endblock %}

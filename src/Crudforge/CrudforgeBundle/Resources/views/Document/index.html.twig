@@ -1,4 +1,6 @@
-<h1>Document list</h1>
+{% extends '::base.html.twig' %}
+{% block body %}
+<h2>Document list</h2>
 
 <table class="records_list">
     <thead>
@@ -22,13 +24,13 @@
                         <a href="{{ path('document_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                     <li>
-                        <a href="../fields" target="_blank">Fields</a>
+                        <a href="../fields" target="_blank">ver Fields</a>
                     </li>
                     <li>
                         <a href="{{ path('generate_crud', { 'id': entity.id }) }}">gerar CRUD</a>
                     </li>
                     <li>
-                        <a href="../{{ entity.name|lower }}" target="_blank">ver CRUD</a>
+                        <a href="../{{ entity.name|lower }}">ver CRUD</a>
                     </li>
                 </ul>
             </td>
@@ -44,3 +46,4 @@
         </a>
     </li>
 </ul>
+{% endblock %}
