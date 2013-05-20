@@ -9,7 +9,9 @@ red='\e[0;31m'
 green='\e[0;32m'
 yellow='\e[0;33m'
 blue='\e[0;34m'
-#
+#go project root
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $DIR/..
 read -p "Digite a senha do usuario root do mysql: " SENHA
 sed -i "s/database_password\:.*/database_password\: $SENHA/g" app/config/parameters.yml
 echo -e "${yellow}Aperte ENTER nas proximas perguntas ate o ponto que o servidor estiver rodando na porta 8000${NC}"
@@ -21,7 +23,7 @@ echo -e "${red}Abra o seu navegador no endereco: http://localhost:8000/simulatio
 app/console server:run
 
 # @todo: rodar depois de encerrar o server
-# clear simulation 
+# clear simulation
 rm src/Crudforge/CrudforgeBundle/Entity/Simulation.php
 rm src/Crudforge/CrudforgeBundle/Controller/SimulationController.php
 rm src/Crudforge/CrudforgeBundle/Form/SimulationType.php

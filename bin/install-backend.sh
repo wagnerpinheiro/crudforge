@@ -9,11 +9,13 @@ red='\e[0;31m'
 green='\e[0;32m'
 yellow='\e[0;33m'
 blue='\e[0;34m'
-#
+#go project root
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $DIR/..
 #install Git
 sudo apt-get install git
 echo -e "${yellow}Git installed${NC}"
-#install dependencies 
+#install dependencies
 sudo apt-get install curl
 #install LAMP Server
 sudo apt-get install lamp-server^

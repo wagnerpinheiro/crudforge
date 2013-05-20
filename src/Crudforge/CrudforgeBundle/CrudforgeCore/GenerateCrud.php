@@ -63,10 +63,10 @@ class GenerateCrud {
         $format = "annotation";
         $fields = array();
         foreach($this->document->getFields() as $field){
-            $fields[$field->getName()] = array('fieldName' => $field->getName(), 'type' => $field->getType(), 'length' => $field->getLength());
+            $fields[$field->getName()] = array('fieldName' => $field->getName(), 'type' => $field->getType(), 'length' => $field->getLength(), 'scale' => $field->getScale());
         }
         $with_repository = false;
-        
+
         /**
          * @todo: replace entitity if exists
          * see: EntityGenerator->setRegenerateEntityIfExists()
@@ -81,19 +81,19 @@ class GenerateCrud {
         $schemaTool->updateSchema($metadatas);
 
         //gera crud
-               
+
         $withWrite = true;
         $prefix = $this->getRoutePrefix($entity);
         $entityClass = $this->container->get('doctrine')->getEntityNamespace($bundle_name).'\\'.$entity;
         $factory = new MetadataFactory($this->container->get('doctrine'));
-        $metadata = $factory->getClassMetadata($entityClass)->getMetadata();      
-        
+        $metadata = $factory->getClassMetadata($entityClass)->getMetadata();
+
         $generator = new DoctrineCrudGenerator($this->container->get('filesystem'), realpath( __DIR__.'/../Resources/skeleton/crud'));
         $generator->generate($bundle, $entity, $metadata[0], $format, $prefix, $withWrite);
-        
+
         $formGenerator = new DoctrineFormGenerator($this->container->get('filesystem'), realpath( __DIR__.'/../Resources/skeleton/form'));
         $formGenerator->generate($bundle, $entity, $metadata[0]);
-        
+
         //$this->getContainer()->get('filesystem')->mkdir($bundle->getPath().'/Resources/config/');
         $routing = new RoutingManipulator($bundle->getPath().'/Resources/config/routing.yml');
         try {
@@ -101,7 +101,7 @@ class GenerateCrud {
         } catch (\RuntimeException $exc) {
             $ret = false;
         }
-        
+
     }
 
     /**
@@ -110,7 +110,7 @@ class GenerateCrud {
     protected function updateCrud(){
 
     }
-    
+
     protected function getRoutePrefix($entity)
     {
         $prefix = strtolower(str_replace(array('\\', '/'), '_', $entity));

@@ -57,7 +57,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -583,16 +583,16 @@
         },
         {
             "name": "kriswallsmith/assetic",
-            "version": "dev-master",
+            "version": "1.1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "80a13792d38652d6f3bcb938c83a67836ad7a48d"
+                "reference": "1aadc97c40e806ed083bc2188042a85f8f6cc6f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/80a13792d38652d6f3bcb938c83a67836ad7a48d",
-                "reference": "80a13792d38652d6f3bcb938c83a67836ad7a48d",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/1aadc97c40e806ed083bc2188042a85f8f6cc6f5",
+                "reference": "1aadc97c40e806ed083bc2188042a85f8f6cc6f5",
                 "shasum": ""
             },
             "require": {
@@ -650,7 +650,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2013-05-14 23:15:02"
+            "time": "2013-05-20 15:39:01"
         },
         {
             "name": "monolog/monolog",

@@ -12,8 +12,9 @@ class FieldsType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('type')
+            ->add('type', 'choice', array('choices' => array('string' => 'Texto', 'integer' => 'Inteiro', 'date' => 'Data', 'decimal' => 'Decimal')))
             ->add('length')
+            ->add('scale')
             ->add('document')
         ;
     }

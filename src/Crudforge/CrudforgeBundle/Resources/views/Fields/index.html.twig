@@ -4,9 +4,11 @@
     <thead>
         <tr>
             <th>Id</th>
+            <th>Document</th>
             <th>Name</th>
             <th>Type</th>
             <th>Length</th>
+            <th>Scale</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -14,9 +16,11 @@
     {% for entity in entities %}
         <tr>
             <td><a href="{{ path('fields_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.document }}</td>
             <td>{{ entity.name }}</td>
             <td>{{ entity.type }}</td>
             <td>{{ entity.length }}</td>
+            <td>{{ entity.scale }}</td>
             <td>
                 <ul>
                     <li>

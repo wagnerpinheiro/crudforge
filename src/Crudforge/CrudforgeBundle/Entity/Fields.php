@@ -43,6 +43,13 @@ class Fields
     private $length;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="scale", type="integer", length=10)
+     */
+    private $scale;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Document", inversedBy="fields")
      * @ORM\JoinColumn(name="document_id", referencedColumnName="id")
      */
@@ -56,7 +63,7 @@ class Fields
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -72,14 +79,14 @@ class Fields
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -95,14 +102,14 @@ class Fields
     public function setType($type)
     {
         $this->type = $type;
-    
+
         return $this;
     }
 
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -118,14 +125,14 @@ class Fields
     public function setDocument(\Crudforge\CrudforgeBundle\Entity\Document $document = null)
     {
         $this->document = $document;
-    
+
         return $this;
     }
 
     /**
      * Get document
      *
-     * @return \Crudforge\CrudforgeBundle\Entity\Document 
+     * @return \Crudforge\CrudforgeBundle\Entity\Document
      */
     public function getDocument()
     {
@@ -141,17 +148,40 @@ class Fields
     public function setLength($length)
     {
         $this->length = $length;
-    
+
         return $this;
     }
 
     /**
      * Get length
      *
-     * @return integer 
+     * @return integer
      */
     public function getLength()
     {
         return $this->length;
+    }
+
+    /**
+     * Set scale
+     *
+     * @param integer $scale
+     * @return Fields
+     */
+    public function setScale($scale)
+    {
+        $this->scale = $scale;
+
+        return $this;
+    }
+
+    /**
+     * Get scale
+     *
+     * @return integer
+     */
+    public function getScale()
+    {
+        return $this->scale;
     }
 }
