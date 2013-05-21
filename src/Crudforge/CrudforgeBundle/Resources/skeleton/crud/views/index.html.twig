@@ -1,4 +1,16 @@
-<h1>{{ entity }} list</h1>
+{{ "{% extends 'CrudforgeBundle::user.html.twig' %}" }}
+{{ "{% block body %}" }}
+<h2>{{ entity }} list</h2>
+
+{% if 'new' in actions %}
+<ul class="ulButtons">
+    <li>
+        <a class="cssButton" href="{{ "{{ path('"~ route_name_prefix ~"_new') }}" }}">
+            Novo
+        </a>
+    </li>
+</ul>
+{% endif %}
 
 <table class="records_list">
     <thead>
@@ -45,12 +57,4 @@
     </tbody>
 </table>
 
-{% if 'new' in actions %}
-<ul>
-    <li>
-        <a href="{{ "{{ path('"~ route_name_prefix ~"_new') }}" }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
-{% endif %}
+{{ "{% endblock %}" }}

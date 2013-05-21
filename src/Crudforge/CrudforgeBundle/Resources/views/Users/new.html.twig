@@ -1,4 +1,6 @@
-<h1>Users creation</h1>
+{% extends 'CrudforgeBundle::admin.html.twig' %}
+{% block body %}
+<h2>Users creation</h2>
 
 <form action="{{ path('users_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
@@ -14,3 +16,4 @@
         </a>
     </li>
 </ul>
+{% endblock %}

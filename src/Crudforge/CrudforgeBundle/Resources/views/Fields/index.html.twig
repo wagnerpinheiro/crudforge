@@ -1,7 +1,18 @@
-{% extends '::base.html.twig' %}
+{% extends 'CrudforgeBundle::admin.html.twig' %}
 {% block body %}
 <h1>Fields list</h1>
-
+<ul class="ulButtons">
+    <li>
+        <a class="cssButton" href="{{ path('fields_new') }}">
+            Novo Campo
+        </a>
+    </li>
+     <li>
+        <a class="cssButton" href="../document">
+            Voltar para Document List
+        </a>
+    </li>
+</ul>
 <table class="records_list">
     <thead>
         <tr>
@@ -24,12 +35,12 @@
             <td>{{ entity.length }}</td>
             <td>{{ entity.scale }}</td>
             <td>
-                <ul>
+                <ul class="ulButtons">
                     <li>
-                        <a href="{{ path('fields_show', { 'id': entity.id }) }}">show</a>
+                        <a class="cssButton" href="{{ path('fields_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('fields_edit', { 'id': entity.id }) }}">edit</a>
+                        <a class="cssButton" href="{{ path('fields_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
             </td>
@@ -38,16 +49,4 @@
     </tbody>
 </table>
 
-<ul>
-    <li>
-        <a href="{{ path('fields_new') }}">
-            Create a new entry
-        </a>
-    </li>
-     <li>
-        <a href="../document">
-            Voltar para Document List
-        </a>
-    </li>
-</ul>
 {% endblock %}

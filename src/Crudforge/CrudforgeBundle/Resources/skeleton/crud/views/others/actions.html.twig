@@ -1,10 +1,10 @@
 
-                <ul>
+                <ul class="ulButtons">
 
                 {%- for action in record_actions %}
 
                     <li>
-                        <a href="{{ "{{ path('"~ route_name_prefix ~"_"~ action ~"', { 'id': entity.id }) }}" }}">{{ action }}</a>
+                        <a class="cssButton" href="{{ "{{ path('"~ route_name_prefix ~"_"~ action ~"', { 'id': entity.id }) }}" }}">{{ action }}</a>
                     </li>
 
                 {%- endfor %}

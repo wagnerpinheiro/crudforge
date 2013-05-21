@@ -1,13 +1,13 @@
 <ul class="record_actions">
     <li>
-        <a href="{{ "{{ path('"~ route_name_prefix ~"') }}" }}">
-            Back to the list
+        <a class="cssButton" href="{{ "{{ path('"~ route_name_prefix ~"') }}" }}">
+            Voltar para a lista
         </a>
     </li>
 {% if ('edit' in actions) and (not hide_edit) %}
     <li>
-        <a href="{{ "{{ path('"~ route_name_prefix ~"_edit', { 'id': entity.id }) }}" }}">
-            Edit
+        <a class="cssButton" href="{{ "{{ path('"~ route_name_prefix ~"_edit', { 'id': entity.id }) }}" }}">
+            Editar
         </a>
     </li>
 {% endif %}
@@ -15,7 +15,7 @@
     <li>
         <form action="{{ "{{ path('"~ route_name_prefix ~"_delete', { 'id': entity.id }) }}" }}" method="post">
             {{ '{{ form_widget(delete_form) }}' }}
-            <button type="submit">Delete</button>
+            <button class="cssButton red" type="submit">Deletar</button>
         </form>
     </li>
 {% endif %}

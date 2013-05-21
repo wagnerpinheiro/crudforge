@@ -26,6 +26,7 @@ sudo mv composer.phar /usr/local/bin/composer
 echo -e "${yellow}Composer installed, use it: composer${NC}"
 cp app/config/parameters.yml.dist app/config/parameters.yml
 composer install
+app/console assets:install --symlink --relative
 #post-install checklist
 echo -e "${blue}\n----------------------------------------------"
 echo -e "TO-DO:"

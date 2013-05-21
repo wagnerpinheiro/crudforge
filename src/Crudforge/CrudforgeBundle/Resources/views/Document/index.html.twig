@@ -1,6 +1,14 @@
-{% extends '::base.html.twig' %}
+{% extends 'CrudforgeBundle::admin.html.twig' %}
 {% block body %}
-<h2>Document list</h2>
+<h2>Documentos</h2>
+
+<ul class="ulButtons">
+    <li>
+        <a class="cssButton" href="{{ path('document_new') }}">
+            Novo Documento
+        </a>
+    </li>
+</ul>
 
 <table class="records_list">
     <thead>
@@ -16,21 +24,21 @@
             <td><a href="{{ path('document_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.name }}</td>
             <td>
-                <ul>
+                <ul class="ulButtons">
                     <li>
-                        <a href="{{ path('document_show', { 'id': entity.id }) }}">show</a>
+                        <a class="cssButton" href="{{ path('document_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('document_edit', { 'id': entity.id }) }}">edit</a>
+                        <a class="cssButton" href="{{ path('document_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                     <li>
-                        <a href="../fields" target="_blank">ver Fields</a>
+                        <a class="cssButton" href="../fields" target="_blank">ver Fields</a>
                     </li>
                     <li>
-                        <a href="{{ path('generate_crud', { 'id': entity.id }) }}">gerar CRUD</a>
+                        <a class="cssButton" href="{{ path('generate_crud', { 'id': entity.id }) }}">gerar CRUD</a>
                     </li>
                     <li>
-                        <a href="../{{ entity.name|lower }}">ver CRUD</a>
+                        <a class="cssButton" href="../{{ entity.name|lower }}">ver CRUD</a>
                     </li>
                 </ul>
             </td>
@@ -39,11 +47,4 @@
     </tbody>
 </table>
 
-<ul>
-    <li>
-        <a href="{{ path('document_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
 {% endblock %}

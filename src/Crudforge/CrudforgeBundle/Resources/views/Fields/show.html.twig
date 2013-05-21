@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'CrudforgeBundle::admin.html.twig' %}
 {% block body %}
 <h2>Fields</h2>
 
@@ -33,19 +33,19 @@
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('fields') }}">
+        <a class="cssButton" href="{{ path('fields') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('fields_edit', { 'id': entity.id }) }}">
+        <a class="cssButton" href="{{ path('fields_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
     <li>
         <form action="{{ path('fields_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button class="cssButton" type="submit">Delete</button>
         </form>
     </li>
 </ul>

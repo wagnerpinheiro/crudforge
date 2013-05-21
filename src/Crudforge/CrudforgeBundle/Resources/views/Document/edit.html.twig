@@ -1,24 +1,24 @@
-{% extends '::base.html.twig' %}
+{% extends 'CrudforgeBundle::admin.html.twig' %}
 {% block body %}
 <h2>Document edit</h2>
 
 <form action="{{ path('document_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <p>
-        <button type="submit">Edit</button>
+        <button  class="cssButton" type="submit">Edit</button>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('document') }}">
+        <a class="cssButton" href="{{ path('document') }}">
             Back to the list
         </a>
     </li>
     <li>
         <form action="{{ path('document_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button  class="cssButton red" type="submit">Delete</button>
         </form>
     </li>
 </ul>

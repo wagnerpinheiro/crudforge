@@ -1,0 +1,17 @@
+#main-crud {
+    margin-left: 2em;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.record_list table, th, td {
+    border: 1px solid #EDEDED;
+    padding-left: 10px;
+    padding-right: 20px;
+}
+
+.record_list table, th {
+    background-color: #C2D2D6;
+}
