@@ -5,6 +5,7 @@
         <title>{% block title %}CRUDForge{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
         <link rel="stylesheet" href="{{ asset('bundles/crudforge/css/crudforge.css') }}" />
     </head>
     <body>
@@ -16,6 +17,9 @@
         <div id="main-crud">
         {% block body %}{% endblock %}
         </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
