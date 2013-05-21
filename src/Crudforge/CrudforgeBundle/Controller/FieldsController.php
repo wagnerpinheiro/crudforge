@@ -33,6 +33,23 @@ class FieldsController extends Controller
             'entities' => $entities,
         );
     }
+    
+    /**
+     * Lists all Fields entities.
+     *
+     * @Route("/{document_id}/list", name="fields_list")
+     * @Template()
+     */
+    public function listAction($document_id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('CrudforgeBundle:Fields')->findByDocument($document_id);
+
+        return array(
+            'entities' => $entities,
+        );
+    }
 
     /**
      * Finds and displays a Fields entity.
@@ -92,8 +109,9 @@ class FieldsController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('fields_show', array('id' => $entity->getId())));
+            
+            $doc = $entity->getDocument();
+            return $this->redirect($this->generateUrl('fields_list', array('document_id' => $doc->getId())));
         }
 
         return array(
@@ -153,7 +171,8 @@ class FieldsController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('fields_edit', array('id' => $id)));
+            $doc = $entity->getDocument();
+            return $this->redirect($this->generateUrl('fields_list', array('document_id' => $doc->getId())));
         }
 
         return array(

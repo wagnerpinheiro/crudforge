@@ -32,7 +32,7 @@
                         <a class="cssButton" href="{{ path('document_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                     <li>
-                        <a class="cssButton" href="../fields" target="_blank">ver Fields</a>
+                        <a class="cssButton" href="{{ path('fields_list', { 'document_id': entity.id }) }}">ver Fields</a>
                     </li>
                     <li>
                         <a class="cssButton" href="{{ path('generate_crud', { 'id': entity.id }) }}">gerar CRUD</a>
