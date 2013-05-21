@@ -36,8 +36,7 @@
         "kriswallsmith/assetic": "1.1.*@dev",
 		"phpunit/phpunit": "3.7.*"
     },
-    "scripts": {
-		"pre-install-cmd": "./bin/install-backend.sh",
+    "scripts": {	
         "post-install-cmd": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
