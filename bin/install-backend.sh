@@ -15,11 +15,11 @@ cd $DIR/..
 #install Git
 sudo apt-get install git
 echo -e "${yellow}Git installed${NC}"
-#install dependencies
-sudo apt-get install curl
 #install LAMP Server
 sudo apt-get install lamp-server^
 echo -e "${yellow}LAMP installed${NC}"
+#install dependencies
+sudo apt-get install curl php5-intl
 #install composer
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
