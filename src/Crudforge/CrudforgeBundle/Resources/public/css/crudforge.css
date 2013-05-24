@@ -2,8 +2,32 @@ body{
     font-family: Verdana;
     font-size: x-small;
 }
-#main-crud {
-    margin-left: 2em;
+
+/* Clearfix for the menu */
+.ui-menu:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.ui-menu .ui-menu-item {    
+    width: 150px;
+}
+
+#main-menu{
+    position: relative;    
+}
+
+ul.ui-menu{
+    left: 0px !important;  
+    top: 27px !important;
+}
+
+.ui-menu{
+   z-index: 1000;
 }
 
 #side-bar{
@@ -25,18 +49,25 @@ h1.logo {
     top: 0.5em;*/
 }
 
+#main-crud {
+    margin-left: 2em;
+}
+
 table {
     border-collapse: collapse;
 }
 
 .record_list table, th, td {
     border: 1px solid #EDEDED;
-    padding-left: 10px;
-    padding-right: 20px;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 0em;
+    padding-top: 0em;
 }
 
 .record_list table, th {
     background-color: #C2D2D6;
+    padding: 0.5em;
 }
 
 

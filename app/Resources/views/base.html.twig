@@ -12,7 +12,16 @@
         <h1 class="logo">CRUDForge</h1>
 
         <div id="main-menu">
-        {% block menu %}
+        {% block mainmenu %}
+            {% block menu %}
+            {% endblock %}
+            <li>
+                <a href="#">Admin</a>
+                <ul>
+                    <li><a href="{{ path('schemas') }}">Definição de Schemas</a></li>
+                     <li><a href="{{ path('users') }}">Usuários</a></li>
+                </ul>
+            </li>
         {% endblock %}
         </div>
 
@@ -24,13 +33,7 @@
               {% block mydocs %}
                   {% render url('document_menu') %}
               {% endblock %}
-          </div>
-          <h3>Admin</h3>
-          <div>
-              <ul>
-                  <li><a href="{{ path('schemas') }}">Schemas</a></li>
-              </ul>
-          </div>
+          </div>          
         </div>
         {% endblock %}
         </div>

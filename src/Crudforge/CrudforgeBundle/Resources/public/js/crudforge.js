@@ -4,6 +4,8 @@ $(function(){
     $( ".cssButton" ).button();
 
     $( "#accordion" ).accordion({ heightStyle: "fill" });
+    
+    $( "#main-menu" ).menu();
 
     //theme tables
     $("table th").each(function(){
