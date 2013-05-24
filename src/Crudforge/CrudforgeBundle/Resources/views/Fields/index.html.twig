@@ -1,6 +1,6 @@
 {% extends 'CrudforgeBundle::admin.html.twig' %}
 {% block body %}
-<h1>Fields list</h1>
+<h1>Campos list</h1>
 <ul class="ulButtons">
     <li>
         <a class="cssButton" href="{{ path('fields_new') }}">
@@ -8,8 +8,8 @@
         </a>
     </li>
      <li>
-        <a class="cssButton" href="{{ path('document') }}">
-            Voltar para Document List
+        <a class="cssButton" href="{{ path('schemas') }}">
+            Voltar para defini&ccedil;&atilde;o dos schemas
         </a>
     </li>
 </ul>
@@ -17,11 +17,11 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>Document</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Length</th>
-            <th>Scale</th>
+            <th>Schema</th>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Tamanho</th>
+            <th>Decimais</th>
             <th>Actions</th>
         </tr>
     </thead>

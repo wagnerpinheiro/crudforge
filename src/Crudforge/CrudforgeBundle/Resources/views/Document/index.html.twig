@@ -1,6 +1,6 @@
 {% extends 'CrudforgeBundle::admin.html.twig' %}
 {% block body %}
-<h2>Documentos</h2>
+<h2>Schemas</h2>
 
 <ul class="ulButtons">
     <li>
@@ -25,20 +25,17 @@
             <td>{{ entity.name }}</td>
             <td>
                 <ul class="ulButtons">
-                    <li>
+                    <!-- <li>
                         <a class="cssButton" href="{{ path('document_show', { 'id': entity.id }) }}">show</a>
+                    </li> -->
+                    <li>
+                        <a class="cssButton" href="{{ path('document_edit', { 'id': entity.id }) }}">editar</a>
                     </li>
                     <li>
-                        <a class="cssButton" href="{{ path('document_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                    <li>
-                        <a class="cssButton" href="{{ path('fields_list', { 'document_id': entity.id }) }}">ver Fields</a>
+                        <a class="cssButton" href="{{ path('fields_list', { 'document_id': entity.id }) }}">ver campos</a>
                     </li>
                     <li>
                         <a class="cssButton" href="{{ path('generate_crud', { 'id': entity.id }) }}">gerar CRUD</a>
-                    </li>
-                    <li>
-                        <a class="cssButton" href="../{{ entity.name|lower }}">ver CRUD</a>
                     </li>
                 </ul>
             </td>

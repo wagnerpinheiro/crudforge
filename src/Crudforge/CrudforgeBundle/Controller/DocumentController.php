@@ -30,7 +30,7 @@ class DocumentController extends Controller
         $entities = $em->getRepository('CrudforgeBundle:Document')->findAll();
 
         return array(
-            'entities' => $entities,
+            'entities' => $entities
         );
     }
 
@@ -217,5 +217,31 @@ class DocumentController extends Controller
         $core->generate();
 
         return $this->redirect($this->generateUrl('document'));
+    }
+
+    /**
+     * Get Document menu.
+     *
+     * @Route("/menu", name="document_menu")
+     * @Template("CrudforgeBundle:Document:menu.html.twig")
+     */
+    public function getMenuAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('CrudforgeBundle:Document')->findAll();
+
+        $router = $this->container->get('router');
+        $routes = array();
+        foreach($entities as $e){
+            $name = $e->getName();
+            $route_test = 'user_' . $e->getUser()->getId() . '_' . strtolower($e->getName()) ;
+            $routes[$name] = $router->getRouteCollection()->get($route_test)?$route_test:'';
+        }
+
+        return array(
+            'entities' => $entities,
+            'routes' => $routes
+        );
     }
 }

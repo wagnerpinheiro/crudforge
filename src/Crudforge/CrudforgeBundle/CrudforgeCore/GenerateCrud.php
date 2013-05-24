@@ -83,7 +83,7 @@ class GenerateCrud {
         //gera crud
 
         $withWrite = true;
-        $prefix = $this->getRoutePrefix($entity);
+        $prefix = 'user/' . $this->document->getUser()->getId() . '/' . $this->getRoutePrefix($entity);
         $entityClass = $this->container->get('doctrine')->getEntityNamespace($bundle_name).'\\'.$entity;
         $factory = new MetadataFactory($this->container->get('doctrine'));
         $metadata = $factory->getClassMetadata($entityClass)->getMetadata();

@@ -1,6 +1,6 @@
 {% extends 'CrudforgeBundle::admin.html.twig' %}
 {% block body %}
-<h2>Fields edit</h2>
+<h2>Campos edit</h2>
 
 <form action="{{ path('fields_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
