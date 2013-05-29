@@ -9,19 +9,19 @@
         <link rel="stylesheet" href="{{ asset('bundles/crudforge/css/crudforge.css') }}" />
     </head>
     <body>
-        <h1 class="logo">CRUDForge</h1>
+        <h1 class="logo"><a href="/schemas" style="text-decoration:none;">CRUDForge</a></h1>
 
         <div id="main-menu">
         {% block mainmenu %}
             {% block menu %}
             {% endblock %}
-            <li>
+            <!-- <li>
                 <a href="#">Admin</a>
-                <ul>
+                <ul> -->
                     <li><a href="{{ path('schemas') }}">Definição de Schemas</a></li>
-                     <li><a href="{{ path('users') }}">Usuários</a></li>
-                </ul>
-            </li>
+                    <li><a href="{{ path('users') }}">Usuários</a></li>
+           <!--     </ul>
+            </li> -->
         {% endblock %}
         </div>
 
@@ -33,7 +33,7 @@
               {% block mydocs %}
                   {% render url('document_menu') %}
               {% endblock %}
-          </div>          
+          </div>
         </div>
         {% endblock %}
         </div>
