@@ -63,6 +63,26 @@ class GenerateCrud {
     
     protected function cleanCrudCache(){
         
+        $bundle_root = $this->bundle->getPath();
+        $entity = $this->entity_name;
+        $files = array(
+            "{$bundle_root}/Controller/{$entity}Controller.php",
+            "{$bundle_root}/Entity/{$entity}.php",
+            "{$bundle_root}/Form/{$entity}Type.php",
+            "{$bundle_root}/Tests/Controller/{$entity}ControllerTest.php",
+            "{$bundle_root}/Resources/views/{$entity}/edit.html.twig",
+            "{$bundle_root}/Resources/views/{$entity}/index.html.twig",
+            "{$bundle_root}/Resources/views/{$entity}/new.html.twig",
+            "{$bundle_root}/Resources/views/{$entity}/show.html.twig",
+        );
+            
+        foreach($files as $file){
+            if(file_exists($file)){
+                unlink($file);                
+            }
+        }
+
+        //{$bundle_root}/Resources/config/routing.yml        
     }
             
     protected function generateEntity(){
