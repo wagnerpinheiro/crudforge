@@ -17,97 +17,105 @@ use Sensio\Bundle\GeneratorBundle\Generator\DoctrineFormGenerator;
 use Sensio\Bundle\GeneratorBundle\Manipulator\RoutingManipulator;
 
 /**
- * @todo srá usado para gerar banco de dados quando não existir
+ * @todo será usado para gerar banco de dados quando não existir
  */
 //use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
 
 
 /**
- * Description of GenerateCrud
+ * Generate Crud Cache Classes from Document
  *
  * @author wagner
  */
 class GenerateCrud {
 
-    protected $document;
+    private $document;
+    private $entity_name;
     private $container;
+    /**
+     * @todo: atualmente a entidade é gerada no CrudforgeBundle, validar depois de acordo com o namespace do usuario (usaremos um bundle para cada usuario?)
+     */
+    protected $bundle_name = 'CrudforgeBundle';
+    private $bundle;
+    
+    //entity options
+    protected $entity_format = "annotation";
+    protected $entity_with_repository = false;
+    
+    protected $crud_with_write = true;
 
     public function __construct(ContainerInterface $container) {
-        $this->container = $container;
+        $this->container = $container;        
+        $this->bundle = $this->container->get('kernel')->getBundle($this->bundle_name);
     }
 
     public function setDocument(Document $document){
          $this->document = $document;
+         $this->entity_name = $this->document->getName(); 
     }
 
     public function generate(){
+        $this->cleanCrudCache();
+        $this->generateEntity();
+        $this->updateSchema();
         $this->generateCrud();
     }
-
-    /**
-     * @todo: #11 implementar geração do CRUD
-     * ver: vendor/sensio/generator-bundle/Sensio/Bundle/GeneratorBundle/Command/GenerateDoctrineEntityCommand.php
-     */
-    protected function generateCrud(){
-        //gera entidade
-
+    
+    protected function cleanCrudCache(){
+        
+    }
+            
+    protected function generateEntity(){
         /* verifica se arquivo existe */
         $generator =  new DoctrineEntityGenerator($this->container->get('filesystem'), $this->container->get('doctrine'));
-        /**
-         * @todo: atualmente a entidade é gerada no CrudforgeBundle, validar depois de acordo com o namespace do usuario (usaremos um bundle para cada usuario?)
-         */
-        $bundle_name = 'CrudforgeBundle';
-        $bundle = $this->container->get('kernel')->getBundle($bundle_name);
-
-        $entity = $this->document->getName();
-        $format = "annotation";
+               
         $fields = array();
         foreach($this->document->getFields() as $field){
             $fields[$field->getName()] = array('fieldName' => $field->getName(), 'type' => $field->getType(), 'length' => $field->getLength(), 'scale' => $field->getScale());
         }
-        $with_repository = false;
 
         /**
          * @todo: replace entitity if exists
          * see: EntityGenerator->setRegenerateEntityIfExists()
          * função: set
          */
-        $generator->generate($bundle, $entity, $format, array_values($fields), $with_repository);
-
-        //atualiza tabela
+        $generator->generate($this->bundle, $this->entity_name, $this->entity_format, array_values($fields), $this->entity_with_repository);
+        
+    }
+    
+    /**
+     * Update database schema from Document Entity
+     */
+    protected function updateSchema(){
         $em = $this->container->get('doctrine')->getManager();
         $schemaTool = new SchemaTool($em);
         $metadatas = $em->getMetadataFactory()->getAllMetadata();
         $schemaTool->updateSchema($metadatas);
+    }
 
-        //gera crud
-
-        $withWrite = true;
-        $prefix = 'user/' . $this->document->getUser()->getId() . '/' . $this->getRoutePrefix($entity);
-        $entityClass = $this->container->get('doctrine')->getEntityNamespace($bundle_name).'\\'.$entity;
+    /**
+     * Generate Crud from Entity
+     */   
+    protected function generateCrud(){
+        
+        $prefix = 'user/' . $this->document->getUser()->getId() . '/' . $this->getRoutePrefix($this->entity_name);
+        $entityClass = $this->container->get('doctrine')->getEntityNamespace($this->bundle_name).'\\'.$this->entity_name;
         $factory = new MetadataFactory($this->container->get('doctrine'));
         $metadata = $factory->getClassMetadata($entityClass)->getMetadata();
 
         $generator = new DoctrineCrudGenerator($this->container->get('filesystem'), realpath( __DIR__.'/../Resources/skeleton/crud'));
-        $generator->generate($bundle, $entity, $metadata[0], $format, $prefix, $withWrite);
+        $generator->generate($this->bundle, $this->entity_name, $metadata[0], $this->entity_format, $prefix, $this->crud_with_write);
 
         $formGenerator = new DoctrineFormGenerator($this->container->get('filesystem'), realpath( __DIR__.'/../Resources/skeleton/form'));
-        $formGenerator->generate($bundle, $entity, $metadata[0]);
+        $formGenerator->generate($this->bundle, $this->entity_name, $metadata[0]);
 
         //$this->getContainer()->get('filesystem')->mkdir($bundle->getPath().'/Resources/config/');
-        $routing = new RoutingManipulator($bundle->getPath().'/Resources/config/routing.yml');
+        $routing = new RoutingManipulator($this->bundle->getPath().'/Resources/config/routing.yml');
         try {
-            $ret = $routing->addResource($bundle->getName(), $format, '/'.$prefix, 'routing/'.strtolower(str_replace('\\', '_', $entity)));
+            $ret = $routing->addResource($this->bundle->getName(), $this->entity_format, '/'.$prefix, 'routing/'.strtolower(str_replace('\\', '_', $this->entity_name)));
         } catch (\RuntimeException $exc) {
             $ret = false;
         }
-
-    }
-
-    /**
-     * @todo: #11 implementar atualização do CRUD
-     */
-    protected function updateCrud(){
 
     }
 
