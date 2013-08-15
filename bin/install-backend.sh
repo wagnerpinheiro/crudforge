@@ -20,6 +20,8 @@ sudo apt-get install lamp-server^
 echo -e "${yellow}LAMP installed${NC}"
 #install dependencies
 sudo apt-get install curl php5-intl
+#enable apache modules
+sudo a2enmod rewrite
 #install composer
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
