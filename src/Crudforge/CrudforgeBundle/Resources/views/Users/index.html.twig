@@ -6,8 +6,7 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>Username</th>
-            <th>Password</th>
+            <th>Username</th>            
             <th>Actions</th>
         </tr>
     </thead>
@@ -15,8 +14,7 @@
     {% for entity in entities %}
         <tr>
             <td><a href="{{ path('users_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.username }}</td>
-            <td>{{ entity.password }}</td>
+            <td>{{ entity.username }}</td>            
             <td>
                 <ul>
                     <li>
