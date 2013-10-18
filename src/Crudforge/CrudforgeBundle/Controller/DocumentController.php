@@ -27,8 +27,13 @@ class DocumentController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CrudforgeBundle:Document')->findAll();
-
+        $security = $this->get('security.context');
+        $user = $this->get('security.context')->getToken()->getUser();
+        if($security->isGranted('ROLE_ADMIN')){
+            $entities = $em->getRepository('CrudforgeBundle:Document')->findAll();
+        }elseif($security->isGranted('ROLE_USER')){
+            $entities = $em->getRepository('CrudforgeBundle:Document')->findBy(array('user'=>$user->getId()));
+        }
         return array(
             'entities' => $entities
         );
@@ -229,7 +234,13 @@ class DocumentController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CrudforgeBundle:Document')->findAll();
+        $security = $this->get('security.context');
+        $user = $this->get('security.context')->getToken()->getUser();
+        if($security->isGranted('ROLE_ADMIN')){
+            $entities = $em->getRepository('CrudforgeBundle:Document')->findAll();
+        }elseif($security->isGranted('ROLE_USER')){
+            $entities = $em->getRepository('CrudforgeBundle:Document')->findBy(array('user'=>$user->getId()));
+        }
 
         $router = $this->container->get('router');
         $routes = array();
