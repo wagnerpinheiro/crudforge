@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Fields
  *
- * @ORM\Table()
+ * @ORM\Table(name="crudforge_fields")
  * @ORM\Entity
  */
 class Fields

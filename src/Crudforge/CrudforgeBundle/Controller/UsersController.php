@@ -87,6 +87,12 @@ class UsersController extends Controller
         $entity  = new Users();
         $form = $this->createForm(new UsersType(), $entity);
         $form->bind($request);
+        
+        //hash password
+        $factory = $this->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($entity);
+        $password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
+        $entity->setPassword($password);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -144,11 +150,17 @@ class UsersController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Users entity.');
         }
-
+        
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new UsersType(), $entity);
         $editForm->bind($request);
-
+        
+        //hash password
+        $factory = $this->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($entity);
+        $password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
+        $entity->setPassword($password);
+        
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();

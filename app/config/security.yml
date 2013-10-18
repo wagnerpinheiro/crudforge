@@ -4,27 +4,35 @@ jms_security_extra:
     
 security:
     firewalls:
-        secured_area:
-            pattern:    ^/
-            anonymous: ~
-            http_basic:
-                realm: "Secured Demo Area"
+      secured_area:
+          pattern:    ^/
+          anonymous: ~
+          http_basic:
+              realm: "Secured Demo Area"
 
     access_control:
-        - { path: ^/, roles: ROLE_USER }
-        - { path: ^/users, roles: ROLE_ADMIN }
-        - { path: ^/document, roles: ROLE_ADMIN }
-        - { path: ^/fields, roles: ROLE_ADMIN }
+      - { path: ^/users, roles: ROLE_ADMIN }
+      - { path: ^/document, roles: ROLE_USER }
+      - { path: ^/fields, roles: ROLE_USER }
+      - { path: ^/, roles: ROLE_USER }
 
     providers:
-        in_memory:
-            memory:
-                users:
-                    crudforge:  { password: unifieo, roles: 'ROLE_USER' }
-                    admin: { password: unifieo, roles: ['ROLE_ADMIN', 'ROLE_USER'] }
+      chain_provider:
+            chain:
+                providers: [in_memory, user_db]
+      user_db:
+         entity: { class: CrudforgeBundle:Users, property: username }
+      in_memory:
+          memory:
+              users:
+                  admin: { password: unifieo, roles: ['ROLE_ADMIN', 'ROLE_USER'] }
 
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+      Crudforge\CrudforgeBundle\Entity\Users: sha1
+      #Symfony\Component\Security\Core\User\User: plaintext
+    role_hierarchy:          
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
 #security:
 #    encoders:
 #        Symfony\Component\Security\Core\User\User: plaintext

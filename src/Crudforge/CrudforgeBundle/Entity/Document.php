@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Document
  *
- * @ORM\Table()
+ * @ORM\Table(name="crudforge_documents")
  * @ORM\Entity
  */
 class Document
