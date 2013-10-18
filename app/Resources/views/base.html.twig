@@ -21,7 +21,8 @@
                     <li><a href="{{ path('schemas') }}">Definição de Schemas</a></li>
                     {% if app.user.username == 'admin' %}
                     <li><a href="{{ path('users') }}">Usuários</a></li>
-                    {% endif %}                    
+                    {% endif %} 
+                    <li><a href="{{ path('logout') }}">Logout</a></li>
            <!--     </ul>
             </li> -->
         {% endblock %}
