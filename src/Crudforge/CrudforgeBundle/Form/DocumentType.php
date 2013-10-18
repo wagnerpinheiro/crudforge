@@ -10,9 +10,9 @@ class DocumentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+       $builder
             ->add('name')
-            ->add('user')
+            //->add('user')            
         ;
     }
 

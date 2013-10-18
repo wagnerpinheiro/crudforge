@@ -19,7 +19,9 @@
                 <a href="#">Admin</a>
                 <ul> -->
                     <li><a href="{{ path('schemas') }}">Definição de Schemas</a></li>
+                    {% if app.user.username == 'admin' %}
                     <li><a href="{{ path('users') }}">Usuários</a></li>
+                    {% endif %}                    
            <!--     </ul>
             </li> -->
         {% endblock %}

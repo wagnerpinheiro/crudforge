@@ -92,6 +92,9 @@ class DocumentController extends Controller
         $entity  = new Document();
         $form = $this->createForm(new DocumentType(), $entity);
         $form->bind($request);
+        
+        $user = $this->get('security.context')->getToken()->getUser();
+        $entity->setUser($user);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
