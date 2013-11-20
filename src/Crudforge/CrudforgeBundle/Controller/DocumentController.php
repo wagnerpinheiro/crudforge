@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Crudforge\CrudforgeBundle\Entity\Document;
 use Crudforge\CrudforgeBundle\Form\DocumentType;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 /**
  * Document controller.
@@ -100,6 +101,10 @@ class DocumentController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            
+            $aclManager = $this->get('crudforge.security');
+            $aclManager->setObjectPermission($entity, MaskBuilder::MASK_OWNER);
+            $aclManager->setClassPermission($entity, MaskBuilder::MASK_OWNER);
 
             return $this->redirect($this->generateUrl('document_show', array('id' => $entity->getId())));
         }
@@ -160,8 +165,16 @@ class DocumentController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('document_edit', array('id' => $id)));
+            
+            //adicionado temporariamente para gerar ACL dos schemas já cadastrados no ambiente dev, remover quando em produção
+            //$aclManager = $this->get('crudforge.security')->getAclManager();
+            //$aclManager->setObjectPermission($entity, MaskBuilder::MASK_OWNER);
+            
+            //$entity2 = new \Crudforge\CrudforgeBundle\Entity\navios4();            
+            //$em->persist($entity2);
+            //$em->flush();
+            //$aclManager->setClassPermission($entity2, MaskBuilder::MASK_OWNER);
+                        
         }
 
         return array(
@@ -220,7 +233,7 @@ class DocumentController extends Controller
             throw $this->createNotFoundException('Unable to find Document entity.');
         }
         /** @var GenerateCrud  */
-        $core = $this->get('crudforge_core');
+        $core = $this->get('crudforge.core');
         $core->setDocument($entity);
         $core->generate();
 

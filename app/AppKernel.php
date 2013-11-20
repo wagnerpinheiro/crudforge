@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),			
             new Crudforge\CrudforgeBundle\CrudforgeBundle(),
-            new Problematic\AclManagerBundle\ProblematicAclManagerBundle(),
+            //new Problematic\AclManagerBundle\ProblematicAclManagerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
