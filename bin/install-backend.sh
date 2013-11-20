@@ -19,7 +19,7 @@ echo -e "${yellow}Git installed${NC}"
 sudo apt-get install lamp-server^
 echo -e "${yellow}LAMP installed${NC}"
 #install dependencies
-sudo apt-get install curl php5-intl
+sudo apt-get install curl php5-intl php5-json
 #enable apache modules
 sudo a2enmod rewrite
 #install composer
