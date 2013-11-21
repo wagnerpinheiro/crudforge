@@ -3,6 +3,7 @@ namespace Crudforge\CrudforgeBundle\CrudforgeCore\Security;
 
 use Problematic\AclManagerBundle\Domain\AclManager as ProblematicAclManager;
 use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 /**
@@ -42,6 +43,18 @@ class AclManager extends ProblematicAclManager{
     
     public function isGranted($attributes, $object = null) {
         return (parent::isGranted($attributes, $object) || $this->isGrantedClass($attributes, get_class($object)));
+    }
+    
+    public function checkGrantedClass($attributes, $class){
+        if(!$this->isGrantedClass($attributes, $class)){
+            throw new AccessDeniedException();
+        }        
+    }
+    
+    public function checkGranted($attributes, $object){
+        if(!$this->isGranted($attributes, $object)){
+            throw new AccessDeniedException();
+        }
     }
     
 }

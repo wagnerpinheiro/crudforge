@@ -17,6 +17,9 @@
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find {{ entity }} entity.');
         }
+        
+        $this->get('crudforge.security')->getAclManager()
+                ->checkGranted('EDIT', $entity);
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new {{ entity_class }}Type(), $entity);

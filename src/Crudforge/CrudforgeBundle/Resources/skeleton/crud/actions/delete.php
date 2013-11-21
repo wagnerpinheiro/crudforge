@@ -19,6 +19,9 @@
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find {{ entity }} entity.');
             }
+            
+            $this->get('crudforge.security')->getAclManager()
+                ->checkGranted('DELETE', $entity);
 
             $em->remove($entity);
             $em->flush();

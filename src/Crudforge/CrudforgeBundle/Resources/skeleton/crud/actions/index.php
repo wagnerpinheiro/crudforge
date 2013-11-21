@@ -11,11 +11,9 @@
     {
         $em = $this->getDoctrine()->getManager();
         
-        $aclManager = $this->get('crudforge.security')->getAclManager();
-        if(!$aclManager->isGrantedClass('VIEW', $em->getRepository('{{ bundle }}:{{ entity }}')->getClassName())){
-            throw $this->createNotFoundException('Without Permission.');
-        }
-
+        $this->get('crudforge.security')->getAclManager()
+            ->checkGrantedClass('VIEW', $em->getRepository('{{ bundle }}:{{ entity }}')->getClassName());
+        
         $entities = $em->getRepository('{{ bundle }}:{{ entity }}')->findAll();
 
 {% if 'annotation' == format %}
