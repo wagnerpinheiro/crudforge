@@ -102,10 +102,9 @@ class DocumentController extends Controller
             $em->persist($entity);
             $em->flush();
             
-            $aclManager = $this->get('crudforge.security');
+            $aclManager = $this->get('crudforge.security')->getAclManager();
             $aclManager->setObjectPermission($entity, MaskBuilder::MASK_OWNER);
-            $aclManager->setClassPermission($entity, MaskBuilder::MASK_OWNER);
-
+            
             return $this->redirect($this->generateUrl('document_show', array('id' => $entity->getId())));
         }
 
@@ -167,13 +166,9 @@ class DocumentController extends Controller
             $em->flush();
             
             //adicionado temporariamente para gerar ACL dos schemas já cadastrados no ambiente dev, remover quando em produção
-            //$aclManager = $this->get('crudforge.security')->getAclManager();
-            //$aclManager->setObjectPermission($entity, MaskBuilder::MASK_OWNER);
+            $aclManager = $this->get('crudforge.security')->getAclManager();
+            $aclManager->setObjectPermission($entity, MaskBuilder::MASK_OWNER);
             
-            //$entity2 = new \Crudforge\CrudforgeBundle\Entity\navios4();            
-            //$em->persist($entity2);
-            //$em->flush();
-            //$aclManager->setClassPermission($entity2, MaskBuilder::MASK_OWNER);
                         
         }
 

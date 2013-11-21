@@ -121,12 +121,10 @@ class GenerateCrud {
      * o ACL é montado diretamente no banco de dados #gambiarra
      */
     protected function setEntityOwner(){
-        $em = $this->container->get('doctrine')->getManager();
-        $class_name = $this->bundle_name . "\\Entity\\" . $this->entity_name ;
-        $sql = "insert into acl_classes (class_type) values ('$class_name')";
-        //$em->getConnection()->exec( $sql );
-        //$sql = "insert into acl_entries () values ()";
-        
+        $security = new CrudforgeSecurity($this->container);
+        $aclManager = $security->getAclManager();
+        $entityClass = $this->container->get('doctrine')->getEntityNamespace($this->bundle_name).'\\'.$this->entity_name;
+        $aclManager->setClassPermission($entityClass, MaskBuilder::MASK_OWNER);        
     }
 
     /**
