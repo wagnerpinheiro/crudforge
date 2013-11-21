@@ -10,6 +10,11 @@
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        
+        $aclManager = $this->get('crudforge.security')->getAclManager();
+        if(!$aclManager->isGrantedClass('VIEW', $em->getRepository('{{ bundle }}:{{ entity }}')->getClassName())){
+            throw $this->createNotFoundException('Without Permission.');
+        }
 
         $entities = $em->getRepository('{{ bundle }}:{{ entity }}')->findAll();
 
