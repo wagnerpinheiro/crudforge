@@ -10,11 +10,12 @@ use Sensio\Bundle\GeneratorBundle\Generator\DoctrineEntityGenerator;
 //from use Doctrine\ORM\Tools\Console\Command\SchemaTool\UpdateCommand
 use Doctrine\ORM\Tools\SchemaTool;
 
-
 use Sensio\Bundle\GeneratorBundle\Generator\DoctrineCrudGenerator;
 use Doctrine\Bundle\DoctrineBundle\Mapping\MetadataFactory;
 use Sensio\Bundle\GeneratorBundle\Generator\DoctrineFormGenerator;
 use Sensio\Bundle\GeneratorBundle\Manipulator\RoutingManipulator;
+
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 /**
  * @todo será usado para gerar banco de dados quando não existir
@@ -57,7 +58,8 @@ class GenerateCrud {
     public function generate(){
         $this->cleanCrudCache();
         $this->generateEntity();
-        $this->updateSchema();
+        $this->setEntityOwner();
+        $this->updateSchema();        
         $this->generateCrud();
     }
     
@@ -111,6 +113,18 @@ class GenerateCrud {
         $schemaTool = new SchemaTool($em);
         $metadatas = $em->getMetadataFactory()->getAllMetadata();
         $schemaTool->updateSchema($metadatas);
+    }
+    
+    /**
+     * Set class owner in ACL
+     * Como não é possivel adicionar um ACL apenas para uma classe sem ter um objeto instaciado (?! ver #41)
+     * o ACL é montado diretamente no banco de dados #gambiarra
+     */
+    protected function setEntityOwner(){
+        $security = new CrudforgeSecurity($this->container);
+        $aclManager = $security->getAclManager();
+        $entityClass = $this->container->get('doctrine')->getEntityNamespace($this->bundle_name).'\\'.$this->entity_name;
+        $aclManager->setClassPermission($entityClass, MaskBuilder::MASK_OWNER);        
     }
 
     /**

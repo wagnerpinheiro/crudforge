@@ -1,10 +1,13 @@
 ## YAML Template.
 ---
 parameters:
-    crudforge_core.class: Crudforge\CrudforgeBundle\CrudforgeCore\GenerateCrud
+    crudforge_generate_crud.class: Crudforge\CrudforgeBundle\CrudforgeCore\GenerateCrud
+    crudforge_security.class: Crudforge\CrudforgeBundle\CrudforgeCore\CrudforgeSecurity
 
 services:
-    crudforge_core:
-        class:        "%crudforge_core.class%"
+    crudforge.core:
+        class:        "%crudforge_generate_crud.class%"
         arguments: ['@service_container']
-
+    crudforge.security:
+        class:        "%crudforge_security.class%"
+        arguments: ['@service_container']

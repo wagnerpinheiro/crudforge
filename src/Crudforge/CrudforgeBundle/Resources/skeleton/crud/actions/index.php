@@ -10,7 +10,10 @@
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
+        
+        $this->get('crudforge.security')->getAclManager()
+            ->checkGrantedClass('VIEW', $em->getRepository('{{ bundle }}:{{ entity }}')->getClassName());
+        
         $entities = $em->getRepository('{{ bundle }}:{{ entity }}')->findAll();
 
 {% if 'annotation' == format %}
