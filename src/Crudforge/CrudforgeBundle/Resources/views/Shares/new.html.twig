@@ -1,0 +1,19 @@
+{% extends 'CrudforgeBundle::admin.html.twig' %}
+{% block body %}
+<h2>Compartilhar CRUD</h2>
+
+<form action="{{ path('shares_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Convidar</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('shares') }}">
+            Cancelar
+        </a>
+    </li>
+</ul>
+{% endblock %}

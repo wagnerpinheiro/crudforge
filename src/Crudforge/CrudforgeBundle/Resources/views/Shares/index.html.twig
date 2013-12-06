@@ -1,0 +1,43 @@
+{% extends 'CrudforgeBundle::admin.html.twig' %}
+{% block body %}
+<h2>Shares list</h2>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>e-mail</th>
+            <th>visualizar</th>
+            <th>editar</th>
+            <th>cadastrar</th>
+            <th>deletar</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.email }}</td>
+            <td><span class="{% if entity.viewperm %}ui-icon ui-icon-circle-check{% endif %}"></span></td>
+            <td><span class="{% if entity.editperm %}ui-icon ui-icon-circle-check{% endif %}"></span></td>
+            <td><span class="{% if entity.createperm %}ui-icon ui-icon-circle-check{% endif %}"></span></td>
+            <td><span class="{% if entity.deleteperm %}ui-icon ui-icon-circle-check{% endif %}"></span></td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('shares_edit', { 'id': entity.id }) }}">editar</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('shares_new') }}">
+            Convidar alguem
+        </a>
+    </li>
+</ul>
+{% endblock %}

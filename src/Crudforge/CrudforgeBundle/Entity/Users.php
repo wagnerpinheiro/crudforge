@@ -57,6 +57,18 @@ class Users implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="Document", mappedBy="user")
      */
     protected $documents;
+    
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Shares", mappedBy="user")
+     */
+    protected $my_shares;
+    
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Shares", mappedBy="user_shared")
+     */
+    protected $others_shares;
 
     public function __construct()
     {
@@ -266,5 +278,71 @@ class Users implements UserInterface, \Serializable
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Add my_shares
+     *
+     * @param \Crudforge\CrudforgeBundle\Entity\Shares $myShares
+     * @return Users
+     */
+    public function addMyShare(\Crudforge\CrudforgeBundle\Entity\Shares $myShares)
+    {
+        $this->my_shares[] = $myShares;
+    
+        return $this;
+    }
+
+    /**
+     * Remove my_shares
+     *
+     * @param \Crudforge\CrudforgeBundle\Entity\Shares $myShares
+     */
+    public function removeMyShare(\Crudforge\CrudforgeBundle\Entity\Shares $myShares)
+    {
+        $this->my_shares->removeElement($myShares);
+    }
+
+    /**
+     * Get my_shares
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyShares()
+    {
+        return $this->my_shares;
+    }
+
+    /**
+     * Add others_shares
+     *
+     * @param \Crudforge\CrudforgeBundle\Entity\Shares $othersShares
+     * @return Users
+     */
+    public function addOthersShare(\Crudforge\CrudforgeBundle\Entity\Shares $othersShares)
+    {
+        $this->others_shares[] = $othersShares;
+    
+        return $this;
+    }
+
+    /**
+     * Remove others_shares
+     *
+     * @param \Crudforge\CrudforgeBundle\Entity\Shares $othersShares
+     */
+    public function removeOthersShare(\Crudforge\CrudforgeBundle\Entity\Shares $othersShares)
+    {
+        $this->others_shares->removeElement($othersShares);
+    }
+
+    /**
+     * Get others_shares
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOthersShares()
+    {
+        return $this->others_shares;
     }
 }

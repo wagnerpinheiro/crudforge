@@ -1,0 +1,52 @@
+{% extends 'CrudforgeBundle::admin.html.twig' %}
+{% block body %}
+<h2>Shares</h2>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>e-mail</th>
+            <td>{{ entity.email }}</td>
+        </tr>
+        <tr>
+            <th>visualizar</th>
+            <td>{{ entity.viewperm }}</td>
+        </tr>
+        <tr>
+            <th>editar</th>
+            <td>{{ entity.editperm }}</td>
+        </tr>
+        <tr>
+            <th>cadastrar</th>
+            <td>{{ entity.createperm }}</td>
+        </tr>
+        <tr>
+            <th>deletar</th>
+            <td>{{ entity.deleteperm }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('shares') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('shares_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('shares_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

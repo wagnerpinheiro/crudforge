@@ -40,6 +40,12 @@ class Document
      * @ORM\OneToMany(targetEntity="Fields", mappedBy="document")
      */
     protected $fields;
+    
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Shares", mappedBy="document")
+     */
+    protected $shares;
 
     public function __construct(){
         $this->fields = new ArrayCollection();
@@ -136,5 +142,38 @@ class Document
     public function getFields()
     {
         return $this->fields;
+    }
+
+    /**
+     * Add shares
+     *
+     * @param \Crudforge\CrudforgeBundle\Entity\Shares $shares
+     * @return Document
+     */
+    public function addShare(\Crudforge\CrudforgeBundle\Entity\Shares $shares)
+    {
+        $this->shares[] = $shares;
+    
+        return $this;
+    }
+
+    /**
+     * Remove shares
+     *
+     * @param \Crudforge\CrudforgeBundle\Entity\Shares $shares
+     */
+    public function removeShare(\Crudforge\CrudforgeBundle\Entity\Shares $shares)
+    {
+        $this->shares->removeElement($shares);
+    }
+
+    /**
+     * Get shares
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getShares()
+    {
+        return $this->shares;
     }
 }
