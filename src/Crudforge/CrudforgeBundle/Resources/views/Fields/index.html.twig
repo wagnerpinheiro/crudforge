@@ -3,13 +3,13 @@
 <h1>Campos list</h1>
 <ul class="ulButtons">
     <li>
-        <a class="cssButton" href="{{ path('fields_new') }}">
+        <a class="cssButton" href="{{ path('fields_new', { 'document_id': document_id }) }}">
             Novo Campo
         </a>
     </li>
      <li>
         <a class="cssButton" href="{{ path('schemas') }}">
-            Voltar para defini&ccedil;&atilde;o dos schemas
+            Voltar para defini&ccedil;&atilde;o do schema
         </a>
     </li>
 </ul>

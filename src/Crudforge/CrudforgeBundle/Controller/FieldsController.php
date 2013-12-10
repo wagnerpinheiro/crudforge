@@ -48,6 +48,7 @@ class FieldsController extends Controller
 
         return array(
             'entities' => $entities,
+            'document_id' => $document_id
         );
     }
 
@@ -78,14 +79,18 @@ class FieldsController extends Controller
     /**
      * Displays a form to create a new Fields entity.
      *
-     * @Route("/new", name="fields_new")
+     * @Route("/{document_id}/new", name="fields_new")
      * @Template()
      */
-    public function newAction()
+    public function newAction($document_id)
     {
-        $entity = new Fields();
-        $form   = $this->createForm(new FieldsType(), $entity);
-
+        $entity = new Fields();        
+        
+        $em = $this->getDoctrine()->getManager();
+        $document = $em->getRepository('CrudforgeBundle:Document')->find($document_id); 
+        
+        $form  = $this->createForm(new FieldsType($document), $entity);
+        
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
@@ -104,7 +109,7 @@ class FieldsController extends Controller
         $entity  = new Fields();
         $form = $this->createForm(new FieldsType(), $entity);
         $form->bind($request);
-
+                
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);

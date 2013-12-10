@@ -11,3 +11,8 @@ services:
     crudforge.security:
         class:        "%crudforge_security.class%"
         arguments: ['@service_container']
+    crudforge.type.entity_hidden:
+      class: Crudforge\CrudforgeBundle\Form\Type\EntityHiddenType
+      arguments: ["@doctrine.orm.entity_manager"]
+      tags:
+      - { name: form.type, alias: entity_hidden }
