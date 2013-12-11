@@ -1,11 +1,11 @@
 {{ "{% extends 'CrudforgeBundle::user.html.twig' %}" }}
 {{ "{% block body %}" }}
-<h2>{{ entity }} edit</h2>
+<h2>{{"{{ document.name }}" }} - Editar</h2>
 
 <form action="{{ "{{ path('"~ route_name_prefix ~"_update', { 'id': entity.id }) }}" }}" method="post" {{ "{{ form_enctype(edit_form) }}" }}>
     {{ "{{ form_widget(edit_form) }}" }}
     <p>
-        <button class="cssButton" type="submit">Editar</button>
+        <button class="cssButton" type="submit">salvar</button>
     </p>
 </form>
 

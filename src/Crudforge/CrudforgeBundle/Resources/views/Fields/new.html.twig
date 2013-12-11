@@ -1,11 +1,11 @@
 {% extends 'CrudforgeBundle::admin.html.twig' %}
 {% block body %}
-<h2>Fields creation</h2>
+<h2>Novo campo</h2>
 
 <form action="{{ path('fields_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
-        <button class="cssButton" type="submit">Create</button>
+        <button class="cssButton" type="submit">salvar</button>
     </p>
 </form>
 

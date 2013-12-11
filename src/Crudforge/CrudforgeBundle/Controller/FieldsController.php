@@ -45,10 +45,12 @@ class FieldsController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('CrudforgeBundle:Fields')->findByDocument($document_id);
+        
+        $document = $em->getRepository('CrudforgeBundle:Document')->find($document_id);
 
         return array(
             'entities' => $entities,
-            'document_id' => $document_id
+            'document' => $document
         );
     }
 

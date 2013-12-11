@@ -1,23 +1,19 @@
 {% extends 'CrudforgeBundle::admin.html.twig' %}
 {% block body %}
-<h1>Campos list</h1>
+<h1>Schema {{ document.name }}</h1>
 <ul class="ulButtons">
     <li>
-        <a class="cssButton" href="{{ path('fields_new', { 'document_id': document_id }) }}">
+        <a class="cssButton" href="{{ path('fields_new', { 'document_id': document.id }) }}">
             Novo Campo
         </a>
     </li>
-     <li>
-        <a class="cssButton" href="{{ path('schemas') }}">
-            Voltar para defini&ccedil;&atilde;o do schema
-        </a>
+    <li>
+        <a class="cssButton" href="{{ path('generate_crud', { 'id': document.id }) }}">gerar CRUD</a>
     </li>
 </ul>
 <table class="records_list">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Schema</th>
             <th>Campo</th>
             <th>Tipo</th>
             <th>Tamanho</th>
@@ -28,8 +24,6 @@
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('fields_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.document }}</td>
             <td>{{ entity.name }}</td>
             <td>{{ entity.type }}</td>
             <td>{{ entity.length }}</td>
@@ -37,10 +31,10 @@
             <td>
                 <ul class="ulButtons">
                     <li>
-                        <a class="cssButton" href="{{ path('fields_show', { 'id': entity.id }) }}">show</a>
+                        <a class="cssButton" href="{{ path('fields_show', { 'id': entity.id }) }}">detalhar</a>
                     </li>
                     <li>
-                        <a class="cssButton" href="{{ path('fields_edit', { 'id': entity.id }) }}">edit</a>
+                        <a class="cssButton" href="{{ path('fields_edit', { 'id': entity.id }) }}">editar</a>
                     </li>
                 </ul>
             </td>

@@ -1,11 +1,11 @@
 {{ "{% extends 'CrudforgeBundle::user.html.twig' %}" }}
 {{ "{% block body %}" }}
-<h2>{{ entity }} creation</h2>
+<h2>{{"{{ document.name }}" }} - Novo</h2>
 
 <form action="{{ "{{ path('"~ route_name_prefix ~"_create') }}" }}" method="post" {{ "{{ form_enctype(form) }}" }}>
     {{ "{{ form_widget(form) }}" }}
     <p>
-        <button class="cssButton" type="submit">Novo</button>
+        <button class="cssButton" type="submit">salvar</button>
     </p>
 </form>
 

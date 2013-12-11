@@ -20,6 +20,8 @@
         $this->get('crudforge.security')->getAclManager()
                 ->checkGranted('VIEW', $entity);
                 
+        $document = $this->get('crudforge.core')->getDocumentByEntity('{{entity}}');
+                
 {% if 'delete' in actions %}
 
         $deleteForm = $this->createDeleteForm($id);
@@ -28,6 +30,7 @@
 {% if 'annotation' == format %}
         return array(
             'entity'      => $entity,
+            'document' => $document,
 {% if 'delete' in actions %}
             'delete_form' => $deleteForm->createView(),
 {% endif %}
@@ -35,6 +38,7 @@
 {% else %}
         return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:show.html.twig', array(
             'entity'      => $entity,
+            'document' => $document,
 {% if 'delete' in actions %}
             'delete_form' => $deleteForm->createView(),
 {%- endif %}

@@ -28,6 +28,22 @@ class Document
      * @ORM\Column(name="name", type="string", length=40)
      */
     private $name;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="route", type="string", length=60)
+     */
+    private $route;
+    
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="entity", type="string", length=60)
+     */
+    private $entity;    
+    
 
     /**
      * @ORM\ManyToOne(targetEntity="Users", inversedBy="documents")
@@ -73,8 +89,8 @@ class Document
      */
     public function setName($name)
     {
-        $this->name = $name;
-
+        $this->name = ucwords(strtolower($name));
+        
         return $this;
     }
 
@@ -175,5 +191,69 @@ class Document
     public function getShares()
     {
         return $this->shares;
+    }
+    
+    public function setProperEntity(){
+        $name = trim(ucwords(strtolower($this->getUser()->getUsername() . ' ' . $this->name)));
+        $name = preg_replace('/[^a-z0-9_]/i', '', $name);        
+        $this->entity = $name;
+        return $this;
+    }
+    
+    public function setProperRoute(){
+        $user = strtolower($this->getUser()->getUsername());
+        $crud = trim(strtolower($this->name));
+        $crud = preg_replace('/[^a-z0-9_]/i', '', $crud);        
+        $this->route = ($user . '_' . $crud);
+        return $this;
+    }
+    
+   
+    
+
+    /**
+     * Set route
+     *
+     * @param string $route
+     * @return Document
+     */
+    public function setRoute($route)
+    {
+        $this->route = $route;
+    
+        return $this;
+    }
+
+    /**
+     * Get route
+     *
+     * @return string 
+     */
+    public function getRoute()
+    {
+        return $this->route;
+    }
+
+    /**
+     * Set entity
+     *
+     * @param string $entity
+     * @return Document
+     */
+    public function setEntity($entity)
+    {
+        $this->entity = $entity;
+    
+        return $this;
+    }
+
+    /**
+     * Get entity
+     *
+     * @return string 
+     */
+    public function getEntity()
+    {
+        return $this->entity;
     }
 }

@@ -32,6 +32,7 @@ class GenerateCrud {
 
     private $document;
     private $entity_name;
+    private $route_prefix;
     private $container;
     /**
      * @todo: atualmente a entidade é gerada no CrudforgeBundle, validar depois de acordo com o namespace do usuario (usaremos um bundle para cada usuario?)
@@ -52,7 +53,8 @@ class GenerateCrud {
 
     public function setDocument(Document $document){
          $this->document = $document;
-         $this->entity_name = $this->document->getName(); 
+         $this->entity_name = $this->document->getEntity(); 
+         $this->route_prefix = str_replace('_', '/',$this->document->getRoute());
     }
 
     public function generate(){
@@ -93,7 +95,12 @@ class GenerateCrud {
                
         $fields = array();
         foreach($this->document->getFields() as $field){
-            $fields[$field->getName()] = array('fieldName' => $field->getName(), 'type' => $field->getType(), 'length' => $field->getLength(), 'scale' => $field->getScale());
+            $fields[$field->getProperFieldName()] = array(
+                'fieldName' => $field->getProperFieldName(), 
+                'type' => $field->getType(), 
+                'length' => $field->getLength(), 
+                'scale' => $field->getScale()
+            );
         }
 
         /**
@@ -132,7 +139,8 @@ class GenerateCrud {
      */   
     protected function generateCrud(){
         
-        $prefix = 'user/' . $this->document->getUser()->getId() . '/' . $this->getRoutePrefix($this->entity_name);
+        //$prefix = 'user/' . $this->document->getUser()->getId() . '/' . $this->getRoutePrefix($this->entity_name);
+        $prefix = $this->route_prefix;
         $entityClass = $this->container->get('doctrine')->getEntityNamespace($this->bundle_name).'\\'.$this->entity_name;
         $factory = new MetadataFactory($this->container->get('doctrine'));
         $metadata = $factory->getClassMetadata($entityClass)->getMetadata();
@@ -146,7 +154,7 @@ class GenerateCrud {
         //$this->getContainer()->get('filesystem')->mkdir($bundle->getPath().'/Resources/config/');
         $routing = new RoutingManipulator($this->bundle->getPath().'/Resources/config/routing.yml');
         try {
-            $ret = $routing->addResource($this->bundle->getName(), $this->entity_format, '/'.$prefix, 'routing/'.strtolower(str_replace('\\', '_', $this->entity_name)));
+            $ret = $routing->addResource($this->bundle->getName(), $this->entity_format, '/'.$prefix, 'routing/'. $this->document->getRoute());
         } catch (\RuntimeException $exc) {
             $ret = false;
         }
@@ -163,6 +171,15 @@ class GenerateCrud {
 
         return $prefix;
     }
+    
+    public function getDocumentByEntity($entity){
+        
+        $em = $this->container->get('doctrine')->getManager();
+        $document = $em->getRepository('CrudforgeBundle:Document')->findOneBy(array('entity'=>$entity));
+        return $document;
+        
+    }
+    
 }
 
 ?>

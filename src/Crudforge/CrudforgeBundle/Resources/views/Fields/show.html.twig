@@ -1,6 +1,6 @@
 {% extends 'CrudforgeBundle::admin.html.twig' %}
 {% block body %}
-<h2>Campos</h2>
+<h2>Campo {{ entity.name }}</h2>
 
 <table class="record_properties">
     <tbody>
@@ -13,19 +13,19 @@
             <td>{{ entity.document }}</td>
         </tr>
         <tr>
-            <th>Name</th>
+            <th>Campo</th>
             <td>{{ entity.name }}</td>
         </tr>
         <tr>
-            <th>Type</th>
+            <th>Tipo</th>
             <td>{{ entity.type }}</td>
         </tr>
         <tr>
-            <th>Length</th>
+            <th>Tamanho</th>
             <td>{{ entity.length }}</td>
         </tr>
         <tr>
-            <th>Scale</th>
+            <th>Decimais</th>
             <td>{{ entity.scale }}</td>
         </tr>
     </tbody>
@@ -34,18 +34,18 @@
 <ul class="record_actions">
     <li>
         <a class="cssButton" href="{{ path('fields_list', { 'document_id': entity.document.id }) }}">
-            Back to the list
+            voltar
         </a>
     </li>
     <li>
         <a class="cssButton" href="{{ path('fields_edit', { 'id': entity.id }) }}">
-            Edit
+            Editar
         </a>
     </li>
     <li>
         <form action="{{ path('fields_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button class="cssButton" type="submit">Delete</button>
+            <button class="cssButton" type="submit">Deletar</button>
         </form>
     </li>
 </ul>

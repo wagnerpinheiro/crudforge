@@ -15,14 +15,18 @@
             ->checkGrantedClass('VIEW', $em->getRepository('{{ bundle }}:{{ entity }}')->getClassName());
         
         $entities = $em->getRepository('{{ bundle }}:{{ entity }}')->findAll();
+        
+        $document = $this->get('crudforge.core')->getDocumentByEntity('{{entity}}');
 
 {% if 'annotation' == format %}
         return array(
             'entities' => $entities,
+            'document' => $document,
         );
 {% else %}
         return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $entities,            
+            'document' => $document,
         ));
 {% endif %}
     }

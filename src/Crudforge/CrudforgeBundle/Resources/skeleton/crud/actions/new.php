@@ -15,15 +15,19 @@
     
         $entity = new {{ entity_class }}();
         $form   = $this->createForm(new {{ entity_class }}Type(), $entity);
+        
+        $document = $this->get('crudforge.core')->getDocumentByEntity('{{entity}}');
 
 {% if 'annotation' == format %}
         return array(
             'entity' => $entity,
+            'document' => $document,
             'form'   => $form->createView(),
         );
 {% else %}
         return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:new.html.twig', array(
             'entity' => $entity,
+            'document' => $document,
             'form'   => $form->createView(),
         ));
 {% endif %}

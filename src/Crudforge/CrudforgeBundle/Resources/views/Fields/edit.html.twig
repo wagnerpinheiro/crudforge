@@ -1,24 +1,24 @@
 {% extends 'CrudforgeBundle::admin.html.twig' %}
 {% block body %}
-<h2>Campos edit</h2>
+<h2>Editar campo</h2>
 
 <form action="{{ path('fields_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <p>
-        <button class="cssButton" type="submit">Edit</button>
+        <button class="cssButton" type="submit">salvar</button>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
         <a class="cssButton" href="{{ path('fields_list', { 'document_id': entity.document.id }) }}">
-            Back to the list
+            Cancelar
         </a>
     </li>
     <li>
         <form action="{{ path('fields_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button class="cssButton red" type="submit">Delete</button>
+            <button class="cssButton red" type="submit">Deletar</button>
         </form>
     </li>
 </ul>

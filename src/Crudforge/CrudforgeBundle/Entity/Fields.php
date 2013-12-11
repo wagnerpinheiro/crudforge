@@ -184,4 +184,10 @@ class Fields
     {
         return $this->scale;
     }
+    
+    public function getProperFieldName(){
+        $name = strtolower(trim($this->name));
+        $name = preg_replace('/[^a-z0-9_]/i', '_', $name);        
+        return $name;
+    } 
 }

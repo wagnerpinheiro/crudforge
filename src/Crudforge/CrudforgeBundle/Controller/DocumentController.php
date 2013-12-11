@@ -96,6 +96,8 @@ class DocumentController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         $entity->setUser($user);
+        $entity->setProperEntity();
+        $entity->setProperRoute();
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -105,7 +107,9 @@ class DocumentController extends Controller
             $aclManager = $this->get('crudforge.security')->getAclManager();
             $aclManager->setObjectPermission($entity, MaskBuilder::MASK_OWNER);
             
-            return $this->redirect($this->generateUrl('document_show', array('id' => $entity->getId())));
+            //return $this->redirect($this->generateUrl('document_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('fields_list', array('document_id' => $entity->getId())));
+            
         }
 
         return array(
@@ -231,8 +235,11 @@ class DocumentController extends Controller
         $core = $this->get('crudforge.core');
         $core->setDocument($entity);
         $core->generate();
-
-        return $this->redirect($this->generateUrl('document'));
+        
+        $user = $this->get('crudforge.security')->getUser();
+        $url = $entity->getRoute();
+        return $this->redirect($this->generateUrl($url));
+        
     }
 
     /**
@@ -257,7 +264,7 @@ class DocumentController extends Controller
         $routes = array();
         foreach($entities as $e){
             $name = $e->getName();
-            $route_test = 'user_' . $e->getUser()->getId() . '_' . strtolower($e->getName()) ;
+            $route_test = $e->getRoute() ;
             $routes[$name] = $router->getRouteCollection()->get($route_test)?$route_test:'';
         }
 
@@ -265,5 +272,23 @@ class DocumentController extends Controller
             'entities' => $entities,
             'routes' => $routes
         );
+    }
+    
+    /**
+     * Go to schema
+     *
+     * @Route("/schema_action/{prefix}/{type}", name="doc_schema_action")
+     * @Template()
+     */
+    public function getSchemaAction($prefix, $type){
+        if($type=='edit'){      
+            $response = $this->forward('CrudforgeBundle:Fields:list', array(
+                'document_id'  => 12
+            ));
+        }
+
+        // ... further modify the response or return it directly
+
+        return $response;
     }
 }

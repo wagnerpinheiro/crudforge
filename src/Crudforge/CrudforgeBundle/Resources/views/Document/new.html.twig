@@ -1,19 +1,20 @@
 {% extends 'CrudforgeBundle::admin.html.twig' %}
 {% block body %}
-<h2>Schema creation</h2>
+<h2>Novo Schema</h2>
 
 <form action="{{ path('document_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
-        <button class="cssButton" type="submit">Create</button>
+        <button class="cssButton" type="submit">salvar</button>
     </p>
 </form>
 
 <ul class="record_actions">
-    <li>
+    <!-- <li>
         <a class="cssButton" href="{{ path('document') }}">
             Back to the list
         </a>
     </li>
+    -->
 </ul>
 {% endblock %}

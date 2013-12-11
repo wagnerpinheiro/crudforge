@@ -22,18 +22,22 @@
 
         $editForm = $this->createForm(new {{ entity_class }}Type(), $entity);
         $deleteForm = $this->createDeleteForm($id);
+        
+        $document = $this->get('crudforge.core')->getDocumentByEntity('{{entity}}');
 
 {% if 'annotation' == format %}
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'document' => $document,
         );
 {% else %}
         return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'document' => $document,
         ));
 {% endif %}
     }

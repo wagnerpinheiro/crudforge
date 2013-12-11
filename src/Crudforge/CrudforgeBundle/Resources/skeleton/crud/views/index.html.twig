@@ -1,12 +1,17 @@
 {{ "{% extends 'CrudforgeBundle::user.html.twig' %}" }}
 {{ "{% block body %}" }}
-<h2>{{ entity }} list</h2>
+<h2>{{"{{ document.name }}" }}</h2>
 
 {% if 'new' in actions %}
 <ul class="ulButtons">
     <li>
         <a class="cssButton" href="{{ "{{ path('"~ route_name_prefix ~"_new') }}" }}">
             Novo
+        </a>
+    </li>
+    <li>
+        <a class="cssButton" href="{{ "{{ path('schema', { 'document_id': document.id }) }}" }}">
+            Editar Schema
         </a>
     </li>
 </ul>
