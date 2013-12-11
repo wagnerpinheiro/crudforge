@@ -51,7 +51,7 @@ class Fields
 
     /**
      * @ORM\ManyToOne(targetEntity="Document", inversedBy="fields")
-     * @ORM\JoinColumn(name="document_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="document_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $document;
 

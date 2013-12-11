@@ -30,13 +30,13 @@ class Shares
 
     /**
      * @ORM\ManyToOne(targetEntity="Document", inversedBy="shares")
-     * @ORM\JoinColumn(name="document_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="document_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $document;
 
     /**
      * @ORM\ManyToOne(targetEntity="Users", inversedBy="others_shares")
-     * @ORM\JoinColumn(name="user_shared_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_shared_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $user_shared;
 
