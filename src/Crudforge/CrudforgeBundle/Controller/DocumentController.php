@@ -294,8 +294,12 @@ class DocumentController extends Controller
 
         $security = $this->get('security.context');
         $user = $this->get('security.context')->getToken()->getUser();
-        $shares = $em->getRepository('CrudforgeBundle:Shares')->findBy(array('user_shared'=>$user->getId()));
-       
+        if($security->isGranted('ROLE_ADMIN')){
+            $shares = array();
+        }elseif($security->isGranted('ROLE_USER')){
+            $shares = $em->getRepository('CrudforgeBundle:Shares')->findBy(array('user_shared'=>$user->getId()));
+        }
+               
         
         $router = $this->container->get('router');
         $routes = array();
