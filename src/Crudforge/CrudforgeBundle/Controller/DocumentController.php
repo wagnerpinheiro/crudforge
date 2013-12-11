@@ -268,14 +268,48 @@ class DocumentController extends Controller
 
         $router = $this->container->get('router');
         $routes = array();
+        $i = 0;
         foreach($entities as $e){
-            $name = $e->getName();
             $route_test = $e->getRoute() ;
-            $routes[$name] = $router->getRouteCollection()->get($route_test)?$route_test:'';
+            if($router->getRouteCollection()->get($route_test)){
+                $routes[$i]['name'] = $e->getName();
+                $routes[$i++]['route'] = $route_test;
+            }            
+        }
+
+        return array(            
+            'routes' => $routes
+        );
+    }
+    
+    /**
+     * Get Shared menu.
+     *
+     * @Route("/shared_menu", name="shared_menu")
+     * @Template("CrudforgeBundle:Document:menu.html.twig")
+     */
+    public function getSharedMenuAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $security = $this->get('security.context');
+        $user = $this->get('security.context')->getToken()->getUser();
+        $shares = $em->getRepository('CrudforgeBundle:Shares')->findBy(array('user_shared'=>$user->getId()));
+       
+        
+        $router = $this->container->get('router');
+        $routes = array();
+        $i=0;
+        foreach($shares as $s){
+            $e = $s->getDocument();
+            $route_test = $e->getRoute() ;
+            if($router->getRouteCollection()->get($route_test)){
+                $routes[$i]['name'] = $e->getUser() . ' : ' . $e->getName();
+                $routes[$i++]['route'] = $route_test;
+            }            
         }
 
         return array(
-            'entities' => $entities,
             'routes' => $routes
         );
     }

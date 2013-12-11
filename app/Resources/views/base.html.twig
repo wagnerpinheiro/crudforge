@@ -37,6 +37,10 @@
               {% block mydocs %}
                   {% render url('document_menu') %}
               {% endblock %}
+          
+              {% block usershared %}
+                  {% render url('shared_menu') %}
+              {% endblock %}
           </div>
         </div>
         {% endblock %}
@@ -50,6 +54,6 @@
         <script src="{{ asset('bundles/crudforge/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
         <script src="{{ asset('bundles/crudforge/js/angular-1.0.7.min.js') }}"></script>
         <script src="{{ asset('bundles/crudforge/js/crudforge.js') }}"></script>
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}{% endblock %}            
     </body>
 </html>

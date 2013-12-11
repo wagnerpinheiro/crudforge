@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Crudforge\CrudforgeBundle\Entity\Shares;
 use Crudforge\CrudforgeBundle\Form\SharesType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 /**
  * Shares controller.
@@ -256,13 +257,34 @@ class SharesController extends Controller
         /** @var Users */
         $user_shared = $em->getRepository('CrudforgeBundle:Users')->findOneByEmail($entity->getEmail());
         
+        $doc = $entity->getDocument();
+        
         if($user_shared){
             $entity->setUserShared($user_shared);
             $em->persist($entity);
             $em->flush();
+            
+            $builder = new MaskBuilder();
+                       
+            if($entity->getViewPerm()){
+                $builder->add('view');
+            }
+            if($entity->getEditPerm()){
+                $builder->add('edit');
+            }
+            if($entity->getCreatePerm()){
+                $builder->add('create');
+            }
+            if($entity->getdeletePerm()){
+                $builder->add('delete');
+            }
+            $mask = $builder->get(); 
+            $aclManager = $this->get('crudforge.security')->getAclManager();
+            $aclManager->setClassPermission($em->getRepository('CrudforgeBundle:' . $doc->getEntity())->getClassName(), 
+                    $mask, 
+                    $user_shared);
         }
 
-        $doc = $entity->getDocument();
         return $this->redirect($this->generateUrl('shares_list', array('document_id' => $doc->getId())));
         
     }

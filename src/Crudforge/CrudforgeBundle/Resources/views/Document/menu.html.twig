@@ -1,9 +1,7 @@
 <ul>
-{% for entity in entities %}
-    {% if routes[entity.name] %}
+{% for route in routes %}
     <li>
-        <a href="{{ path(routes[entity.name]) }}">{{ entity.name }}</a>
+        <a href="{{ path(route.route) }}">{{ route.name }}</a>
     </li>
-    {% endif %}
 {% endfor %}
 </ul>
