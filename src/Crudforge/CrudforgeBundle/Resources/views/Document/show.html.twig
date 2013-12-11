@@ -9,7 +9,7 @@
             <td>{{ entity.id }}</td>
         </tr>
         <tr>
-            <th>Name</th>
+            <th>Nome</th>
             <td>{{ entity.name }}</td>
         </tr>
     </tbody>
@@ -18,18 +18,18 @@
 <ul class="record_actions">
     <li>
         <a class="cssButton" href="{{ path('document') }}">
-            Back to the list
+            Voltar para a lista
         </a>
     </li>
     <li>
         <a class="cssButton" href="{{ path('document_edit', { 'id': entity.id }) }}">
-            Edit
+            Editar
         </a>
     </li>
     <li>
         <form action="{{ path('document_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button class="cssButton red" type="submit">Delete</button>
+            <button class="cssButton red" type="submit">Deletar</button>
         </form>
     </li>
 </ul>

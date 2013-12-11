@@ -54,7 +54,7 @@ class GenerateCrud {
     public function setDocument(Document $document){
          $this->document = $document;
          $this->entity_name = $this->document->getEntity(); 
-         $this->route_prefix = str_replace('_', '/',$this->document->getRoute());
+         $this->route_prefix = str_replace('_', '/', $this->document->getRoute());
     }
 
     public function generate(){

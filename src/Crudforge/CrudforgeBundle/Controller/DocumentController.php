@@ -164,6 +164,9 @@ class DocumentController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new DocumentType(), $entity);
         $editForm->bind($request);
+        
+        $entity->setProperEntity();
+        $entity->setProperRoute();
 
         if ($editForm->isValid()) {
             $em->persist($entity);
@@ -236,9 +239,12 @@ class DocumentController extends Controller
         $core->setDocument($entity);
         $core->generate();
         
-        $user = $this->get('crudforge.security')->getUser();
-        $url = $entity->getRoute();
-        return $this->redirect($this->generateUrl($url));
+        //$user = $this->get('crudforge.security')->getUser();
+        $url = '/' . str_replace('_','/',$entity->getRoute());
+        return $this->redirect($url);
+        
+        //$response = $this->forward('CrudforgeBundle:' . $entity->getEntity() . ':index');        
+        //return $response;
         
     }
 
