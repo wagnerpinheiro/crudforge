@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Table(name="crudforge_shares")
  * @ORM\Entity(repositoryClass="Crudforge\CrudforgeBundle\Entity\SharesRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Shares
 {
@@ -270,5 +271,5 @@ class Shares
     public function getUserShared()
     {
         return $this->user_shared;
-    }
+    }    
 }

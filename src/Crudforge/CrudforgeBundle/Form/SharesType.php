@@ -4,10 +4,19 @@ namespace Crudforge\CrudforgeBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SharesType extends AbstractType
 {
+    private $document;
+    
+    public function __construct(\Crudforge\CrudforgeBundle\Entity\Document $document = null)
+    {
+        $this->document = $document;
+    }
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -15,25 +24,41 @@ class SharesType extends AbstractType
                 'label'     => 'e-mail'
             ))
             ->add('view_perm', 'checkbox', array(
-                'label'     => 'visualizar',
-                'required'  => false,
+                'label'     => 'permitir visualizar',
+                'required'  => false,                
             ))
             ->add('edit_perm', 'checkbox', array(
-                'label'     => 'editar',
+                'label'     => 'permitir editar',
                 'required'  => false,
             ))
             ->add('create_perm', 'checkbox', array(
-                'label'     => 'cadastrar',
+                'label'     => 'permitir cadastrar',
                 'required'  => false,
             ))
             ->add('delete_perm', 'checkbox', array(
-                'label'     => 'deletar',
+                'label'     => 'permitir deletar',
                 'required'  => false,
             ))
-            ->add('user')
-            ->add('document')
-            ->add('user_shared')
+            //->add('user')
+            ->add('document', 'entity_hidden', array(
+               'class' => 'CrudforgeBundle:Document'
+            ))
+            //->add('user_shared')
         ;
+        
+        $factory = $builder->getFormFactory();
+        $document = $this->document;
+
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function(FormEvent $event) use($document, $factory){
+                if($document){
+                    $data = $event->getData();
+                    $data->setDocument($document);
+                    $event->setData($data);
+                }
+            }
+        );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

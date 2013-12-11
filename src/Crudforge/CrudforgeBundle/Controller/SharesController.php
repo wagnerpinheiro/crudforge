@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Crudforge\CrudforgeBundle\Entity\Shares;
 use Crudforge\CrudforgeBundle\Form\SharesType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Shares controller.
@@ -25,12 +26,40 @@ class SharesController extends Controller
      */
     public function indexAction()
     {
+        throw new NotFoundHttpException('Vocẽ não tem permissão para executar esta ação.');
+        
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('CrudforgeBundle:Shares')->findAll();
+        
+        $security = $this->get('security.context');
+        $user = $this->get('crudforge.security')->getUser();
+        if($security->isGranted('ROLE_ADMIN')){
+            $entities = $em->getRepository('CrudforgeBundle:Shares')->findAll();
+        }elseif($security->isGranted('ROLE_USER')){
+            $entities = $em->getRepository('CrudforgeBundle:Shares')->findBy(array('user'=>$user->getId()));
+        }
 
         return array(
             'entities' => $entities,
+        );
+    }
+    
+    /**
+     * Lists all document shares 
+     *
+     * @Route("/{document_id}/list", name="shares_list")
+     * @Template()
+     */
+    public function listAction($document_id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('CrudforgeBundle:Shares')->findByDocument($document_id);
+        
+        $document = $em->getRepository('CrudforgeBundle:Document')->find($document_id);
+
+        return array(
+            'entities' => $entities,
+            'document' => $document
         );
     }
 
@@ -61,13 +90,17 @@ class SharesController extends Controller
     /**
      * Displays a form to create a new Shares entity.
      *
-     * @Route("/new", name="shares_new")
+     * @Route("/{document_id}/new", name="shares_new")
      * @Template()
      */
-    public function newAction()
+    public function newAction($document_id)
     {
         $entity = new Shares();
-        $form   = $this->createForm(new SharesType(), $entity);
+        
+        $em = $this->getDoctrine()->getManager();
+        $document = $em->getRepository('CrudforgeBundle:Document')->find($document_id); 
+        
+        $form   = $this->createForm(new SharesType($document), $entity);
 
         return array(
             'entity' => $entity,
@@ -87,13 +120,17 @@ class SharesController extends Controller
         $entity  = new Shares();
         $form = $this->createForm(new SharesType(), $entity);
         $form->bind($request);
-
+        
+        $user = $this->get('crudforge.security')->getUser();
+        $entity->setUser($user);
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('shares_show', array('id' => $entity->getId())));
+            $doc = $entity->getDocument();
+            return $this->redirect($this->generateUrl('shares_list', array('document_id' => $doc->getId())));
         }
 
         return array(
@@ -152,8 +189,10 @@ class SharesController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('shares_edit', array('id' => $id)));
+            
+            //return $this->redirect($this->generateUrl('shares_edit', array('id' => $id)));
+            $doc = $entity->getDocument();
+            return $this->redirect($this->generateUrl('shares_list', array('document_id' => $doc->getId())));
         }
 
         return array(
@@ -181,12 +220,16 @@ class SharesController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Shares entity.');
             }
+            
+            $doc = $entity->getDocument();
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('shares'));
+        //return $this->redirect($this->generateUrl('shares'));
+        $doc = $entity->getDocument();
+        return $this->redirect($this->generateUrl('shares_list', array('document_id' => $doc->getId())));
     }
 
     private function createDeleteForm($id)
@@ -195,5 +238,32 @@ class SharesController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+    
+    /**
+     * Accept a share
+     *
+     * @Route("/{id}/accept", name="shares_accept")
+     * @Template()
+     */
+    public function acceptAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        /** @var Shares */
+        $entity = $em->getRepository('CrudforgeBundle:Shares')->find($id);
+        
+        /** @var Users */
+        $user_shared = $em->getRepository('CrudforgeBundle:Users')->findOneByEmail($entity->getEmail());
+        
+        if($user_shared){
+            $entity->setUserShared($user_shared);
+            $em->persist($entity);
+            $em->flush();
+        }
+
+        $doc = $entity->getDocument();
+        return $this->redirect($this->generateUrl('shares_list', array('document_id' => $doc->getId())));
+        
     }
 }

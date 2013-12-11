@@ -29,7 +29,7 @@ class DocumentController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $security = $this->get('security.context');
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->get('crudforge.security')->getUser();
         if($security->isGranted('ROLE_ADMIN')){
             $entities = $em->getRepository('CrudforgeBundle:Document')->findAll();
         }elseif($security->isGranted('ROLE_USER')){
@@ -94,7 +94,7 @@ class DocumentController extends Controller
         $form = $this->createForm(new DocumentType(), $entity);
         $form->bind($request);
         
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->get('crudforge.security')->getUser();
         $entity->setUser($user);
         $entity->setProperEntity();
         $entity->setProperRoute();

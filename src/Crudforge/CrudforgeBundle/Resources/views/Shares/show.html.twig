@@ -32,20 +32,20 @@
 </table>
 
 <ul class="record_actions">
-    <li>
+    <!-- <li>
         <a href="{{ path('shares') }}">
             Back to the list
         </a>
-    </li>
+    </li> -->
     <li>
         <a href="{{ path('shares_edit', { 'id': entity.id }) }}">
-            Edit
+            Editar
         </a>
     </li>
     <li>
         <form action="{{ path('shares_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button type="submit">Deletar   </button>
         </form>
     </li>
 </ul>

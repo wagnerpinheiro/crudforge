@@ -32,7 +32,7 @@
                         <a class="cssButton" href="{{ path('document_edit', { 'id': entity.id }) }}">editar</a>
                     </li>
                     <li>
-                        <a class="cssButton" href="{{ path('fields_list', { 'document_id': entity.id }) }}">ver campos</a>
+                        <a class="cssButton" href="{{ path('fields_list', { 'document_id': entity.id }) }}">adicionar campos</a>
                     </li>
                     <li>
                         <a class="cssButton" href="{{ path('generate_crud', { 'id': entity.id }) }}">gerar CRUD</a>
@@ -43,5 +43,17 @@
     {% endfor %}
     </tbody>
 </table>
+
+<br />
+<br />
+<ul>Dicas:
+    <li>Nessa tela estão listados todos os sesu schemas, você pode <a href="{{ path('document_new') }}">adicionar um novo</a> ou alterar um existente</li>
+    <li>Após adicionar campos no seu schema, utilize a função 'gerar CRUD' para começar a utilizar o seu CRUD</li>
+</ul>
+<br />
+<ul>Definições:
+    <li>Schema: modelo de dados utilizado para estruturar a tabela onde serão realizados os cadastros</li>
+    <li>CRUD: interfaces gráficas para o cadastramento e edição dos dados</li>
+</ul>
 
 {% endblock %}

@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Crudforge\CrudforgeBundle\Entity\Fields;
 use Crudforge\CrudforgeBundle\Form\FieldsType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Fields controller.
@@ -25,6 +26,8 @@ class FieldsController extends Controller
      */
     public function indexAction()
     {
+        throw new NotFoundHttpException('Vocẽ não tem permissão para executar esta ação.');
+        
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('CrudforgeBundle:Fields')->findAll();
