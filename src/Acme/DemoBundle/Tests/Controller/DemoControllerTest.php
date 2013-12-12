@@ -6,6 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DemoControllerTest extends WebTestCase
 {
+    
+    /**
+     * setup test
+     */
+    protected function setUp()
+    {
+        //mark test as skipped
+        $this->markTestSkipped('Teste funcional para o demo Acme inativo');
+    }
+    
     public function testIndex()
     {
         $client = static::createClient();

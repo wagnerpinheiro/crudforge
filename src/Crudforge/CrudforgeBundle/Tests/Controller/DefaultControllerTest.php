@@ -6,6 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
+    /**
+     * setup test
+     */
+    protected function setUp()
+    {
+        //mark test as skipped
+        $this->markTestSkipped('Teste funcional para a classe DefaultController criado mas não ativo.');
+    }
+    
     public function testIndex()
     {
         $client = static::createClient();
