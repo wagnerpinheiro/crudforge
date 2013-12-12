@@ -15,8 +15,8 @@ class CrudforgeSecurityTest extends WebTestCase{
 		
 	// Novo usuário
 	$client = static::createClient();
-	
-	// Usuário tenta acessar uma URL direta, antes de passar pelo login
+        
+        // Usuário tenta acessar uma URL direta, antes de passar pelo login
 	$crawler = $client->request('GET', '/document/');
 	$this->assertEquals(302, $client->getResponse()->getStatusCode());
 	

@@ -6,7 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DocumentControllerTest extends WebTestCase
 {
-    /*
+    
+    /**
+     * setup test
+     */
+    protected function setUp()
+    {
+        //mark test as skipped
+        $this->markTestSkipped('Teste funcional para a classe DocumentController criado mas não ativo.');
+    }
+    
     public function testCompleteScenario()
     {
         // Create a new client to browse the application
@@ -51,5 +60,4 @@ class DocumentControllerTest extends WebTestCase
         $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
     }
 
-    */
 }
