@@ -4,26 +4,39 @@ var Fields = {
     hideLengthScale: function(){
         $('#crudforge_crudforgebundle_fieldstype_length').parent().hide();
         $('#crudforge_crudforgebundle_fieldstype_scale').parent().hide();
-        $('#crudforge_crudforgebundle_fieldstype_length').val(30);
-        $('#crudforge_crudforgebundle_fieldstype_scale').val(2);
+        $('#crudforge_crudforgebundle_fieldstype_length').removeAttr('required');
+        $('#crudforge_crudforgebundle_fieldstype_scale').removeAttr('required');
     },
     showLength: function(){
-        $('#crudforge_crudforgebundle_fieldstype_length').parent().show();        
+        $('#crudforge_crudforgebundle_fieldstype_length').parent().show();
+        $('#crudforge_crudforgebundle_fieldstype_length').attr('required', 'required');
     },
     showScale: function(){        
         $('#crudforge_crudforgebundle_fieldstype_scale').parent().show();
+        $('#crudforge_crudforgebundle_fieldstype_scale').attr('required', 'required');
     },
     typeOnChange: function(){
         tipo = $('#crudforge_crudforgebundle_fieldstype_type').val();
         Fields.hideLengthScale();
 
-        if(tipo==='string' || tipo==='integer'){                
+        if(tipo==='string'){
+            if(!$('#crudforge_crudforgebundle_fieldstype_length').val()){
+               $('#crudforge_crudforgebundle_fieldstype_length').val(30);
+            }                
             Fields.showLength();
+            $('#crudforge_crudforgebundle_fieldstype_scale').val('');
         }else if(tipo==='decimal'){
+            if(!$('#crudforge_crudforgebundle_fieldstype_length').val()){
+               $('#crudforge_crudforgebundle_fieldstype_length').val(14);
+            }
+            if(!$('#crudforge_crudforgebundle_fieldstype_scale').val()){
+               $('#crudforge_crudforgebundle_fieldstype_scale').val(2);
+            }
             Fields.showLength();
             Fields.showScale();                
-        }else if(tipo==='date'){
-
+        }else if(tipo==='date' ||  tipo==='integer'){
+            $('#crudforge_crudforgebundle_fieldstype_length').val('');
+            $('#crudforge_crudforgebundle_fieldstype_scale').val('');
         }
     },
     init: function(){

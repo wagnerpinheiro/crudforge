@@ -26,16 +26,14 @@ class FieldsType extends AbstractType
             ->add('type', 'choice', array(
                 'choices' => array('string' => 'Texto', 'integer' => 'Inteiro', 'date' => 'Data', 'decimal' => 'Decimal'),
                 'label' => 'tipo',
-                'data' => 'string'
             ))
             ->add('length', 'integer', array(
                 'label'=>'tamanho',
-                'data' => '30'
+                'required' => false
             ))
             ->add('scale', 'integer', array(
                 'label'=>'decimais',
-                'data' => '2'                
-                
+                'required' => false                
             ))
             ->add('document', 'entity_hidden', array(
                'class' => 'CrudforgeBundle:Document'
