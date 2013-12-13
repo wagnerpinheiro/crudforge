@@ -150,15 +150,18 @@ class GenerateCrud {
 
         $formGenerator = new DoctrineFormGenerator($this->container->get('filesystem'), realpath( __DIR__.'/../Resources/skeleton/form'));
         $formGenerator->generate($this->bundle, $this->entity_name, $metadata[0]);
-
-        //$this->getContainer()->get('filesystem')->mkdir($bundle->getPath().'/Resources/config/');
+        
+        //não existe necessidade de criar uma rota 
+        //visto que já existe rota para o tipo anotação de controller no routing.yml do app
+        /*
         $routing = new RoutingManipulator($this->bundle->getPath().'/Resources/config/routing.yml');
         try {
             $ret = $routing->addResource($this->bundle->getName(), $this->entity_format, '/'.$prefix, 'routing/'. $this->document->getRoute());
         } catch (\RuntimeException $exc) {
+            //die($exc->getTraceAsString());
             $ret = false;
-        }
-
+        }*/
+        
     }
 
     protected function getRoutePrefix($entity)

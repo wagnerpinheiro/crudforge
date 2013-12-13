@@ -240,13 +240,32 @@ class DocumentController extends Controller
         $core->setDocument($entity);
         $core->generate();
         
-        //$user = $this->get('crudforge.security')->getUser();
-        $url = '/' . str_replace('_','/',$entity->getRoute());
-        return $this->redirect($url);
+        /**
+         * @todo Redirect não esta funcionando, provavelmente pq é utilizado uma rota via anotação no controller do crud 
+         */
+        //return $this->redirect($this->generateUrl($entity->getRoute()));
         
-        //$response = $this->forward('CrudforgeBundle:' . $entity->getEntity() . ':index');        
-        //return $response;
+        //workaround
+        $response = $this->forward('CrudforgeBundle:' . $entity->getEntity() . ':index');        
+        return $response;
         
+        //teste de gambiarra 1
+        /*
+        return $this->redirect($this->generateUrl('doc_schema_action',array(
+            'prefix'=>$entity->getRoute(),
+            'action'=>'redirect'
+            )
+        ));         
+        */
+        
+        //teste de gambiarra 2
+        /*
+        $response = $this->forward('CrudforgeBundle:Document:getSchema', array(
+            'prefix'=>$entity->getRoute(),
+            'action'=>'redirect'
+        ));        
+        return $response;
+        */
     }
 
     /**
@@ -322,15 +341,19 @@ class DocumentController extends Controller
     
     /**
      * Go to schema
-     *
-     * @Route("/schema_action/{prefix}/{type}", name="doc_schema_action")
+     * @todo Remover essas gambiarras que não estão sendo utilizadas, ver bug do redirect ao gerar o crud
+     * @Route("/schema_action/{prefix}/{action}", name="doc_schema_action")
      * @Template()
      */
-    public function getSchemaAction($prefix, $type){
-        if($type=='edit'){      
+    public function getSchemaAction($prefix, $action){
+        if($action=='edit'){      
             $response = $this->forward('CrudforgeBundle:Fields:list', array(
                 'document_id'  => 12
             ));
+        }
+        
+        if($action=='redirect'){
+            return $this->redirect($this->generateUrl($prefix));            
         }
 
         // ... further modify the response or return it directly
