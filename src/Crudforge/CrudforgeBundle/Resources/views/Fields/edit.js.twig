@@ -1,0 +1,38 @@
+{% block javascripts %}
+<script type="text/javascript">
+var Fields = {
+    hideLengthScale: function(){
+        $('#crudforge_crudforgebundle_fieldstype_length').parent().hide();
+        $('#crudforge_crudforgebundle_fieldstype_scale').parent().hide();
+        $('#crudforge_crudforgebundle_fieldstype_length').val(30);
+        $('#crudforge_crudforgebundle_fieldstype_scale').val(2);
+    },
+    showLength: function(){
+        $('#crudforge_crudforgebundle_fieldstype_length').parent().show();        
+    },
+    showScale: function(){        
+        $('#crudforge_crudforgebundle_fieldstype_scale').parent().show();
+    },
+    typeOnChange: function(){
+        tipo = $('#crudforge_crudforgebundle_fieldstype_type').val();
+        Fields.hideLengthScale();
+
+        if(tipo==='string' || tipo==='integer'){                
+            Fields.showLength();
+        }else if(tipo==='decimal'){
+            Fields.showLength();
+            Fields.showScale();                
+        }else if(tipo==='date'){
+
+        }
+    },
+    init: function(){
+        $('#crudforge_crudforgebundle_fieldstype_type').change(Fields.typeOnChange);
+    }
+}
+$( document ).ready(function() {
+    Fields.typeOnChange();
+    Fields.init();
+});
+</script>
+{% endblock %}

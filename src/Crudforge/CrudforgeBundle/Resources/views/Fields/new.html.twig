@@ -1,4 +1,5 @@
 {% extends 'CrudforgeBundle::admin.html.twig' %}
+{% use 'CrudforgeBundle:Fields:edit.js.twig' %}
 {% block body %}
 <h2>Novo campo</h2>
 
@@ -8,5 +9,4 @@
         <button class="cssButton" type="submit">salvar</button>
     </p>
 </form>
-
 {% endblock %}
