@@ -38,14 +38,14 @@ class Fields
     /**
      * @var integer
      *
-     * @ORM\Column(name="length", type="integer", length=10)
+     * @ORM\Column(name="length", type="integer", length=10, nullable=true)
      */
     private $length;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="scale", type="integer", length=10)
+     * @ORM\Column(name="scale", type="integer", length=10, nullable=true)
      */
     private $scale;
 
