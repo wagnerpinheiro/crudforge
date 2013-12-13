@@ -18,8 +18,10 @@
             <!-- <li>
                 <a href="#">Admin</a>
                 <ul> -->
+                    {% if app.user.username != 'admin' %}
                     <li><a href="{{ path('document_new') }}">Novo Schema</a></li>
                     <li><a href="{{ path('schemas') }}">Meus Schemas</a></li>
+                    {% endif %} 
                     {% if app.user.username == 'admin' %}
                     <li><a href="{{ path('users') }}">Usuários</a></li>
                     {% endif %} 
@@ -32,6 +34,12 @@
         <div id="side-bar">
         {% block sidebar %}
         <div id="accordion">
+          {% if app.user.username == 'admin' %}
+          <h3></h3>
+          <div>
+          </div>
+          {% endif %}
+          {% if app.user.username != 'admin' %}
           <h3>CRUDs</h3>
           <div>
               {% block mydocs %}
@@ -42,6 +50,7 @@
                   {% render url('shared_menu') %}
               {% endblock %}
           </div>
+          {% endif %}
         </div>
         {% endblock %}
         </div>

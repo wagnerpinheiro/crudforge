@@ -21,11 +21,11 @@ share:
     defaults:  { _controller: CrudforgeBundle:Shares:list }
 
 login:
-    pattern:   /login
+    pattern: /login
     defaults:  { _controller: CrudforgeBundle:Default:login }
     
 login_check:
-    pattern:   /login_check
+    pattern: /login_check
     
 logout:
     pattern: /logout  

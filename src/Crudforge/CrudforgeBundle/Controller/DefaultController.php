@@ -16,8 +16,32 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return array(
+        $security = $this->get('security.context');
+        if($security->isGranted('ROLE_ADMIN')){
+            $template = 'CrudforgeBundle:Default:indexAdmin.html.twig';
+        }elseif($security->isGranted('ROLE_USER')){
+            $template = 'CrudforgeBundle:Default:indexUser.html.twig';
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $estatisticas['users_count'] = $em->createQueryBuilder()
+              ->select('COUNT(u)')
+              ->from('CrudforgeBundle:Users', 'u')
+              ->getQuery()
+              ->getSingleScalarResult();
+        
+        $estatisticas['schemas_count'] = $em->createQueryBuilder()
+              ->select('COUNT(d)')
+              ->from('CrudforgeBundle:Document', 'd')
+              ->getQuery()
+              ->getSingleScalarResult();
+        
+        return $this->render(
+            $template,
+            array('estatisticas'=>$estatisticas)
         );
+        
     }
     
     /**
@@ -28,7 +52,7 @@ class DefaultController extends Controller
         //clear the token, cancel session and redirect
         $this->get('security.context')->setToken(null);
         $this->get('request')->getSession()->invalidate();
-        return $this->redirect($this->generateUrl('schemas'));
+        return $this->redirect($this->generateUrl('home'));
     }
     
     /**

@@ -1,0 +1,13 @@
+{% extends 'CrudforgeBundle::admin.html.twig' %}
+{% block body %}
+<h2>Bem-vindo ao CRUDForge</h2>
+<br />
+<br />
+Utilize o menu para executar as tarefas administrativas.
+<br />
+<br />
+<ul>Estatisticas:
+<li>Usuários cadastrados: {{ estatisticas.users_count }}</li>
+<li>Schemas cadastrados: {{ estatisticas.schemas_count }}</li>
+</ul>
+{% endblock %}

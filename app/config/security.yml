@@ -12,10 +12,10 @@ security:
           form_login:
             login_path:  login
             check_path:  login_check
-            default_target_path: /schemas
+            default_target_path: /home
           logout:
             path:   /logout
-            target: /schemas
+            target: /home
             invalidate_session: true
 
     access_control:
