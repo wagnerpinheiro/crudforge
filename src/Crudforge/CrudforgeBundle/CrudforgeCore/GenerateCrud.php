@@ -45,6 +45,7 @@ class GenerateCrud {
     protected $entity_with_repository = false;
     
     protected $crud_with_write = true;
+    protected $crud_overwrite = true;
 
     public function __construct(ContainerInterface $container) {
         $this->container = $container;        
@@ -146,7 +147,7 @@ class GenerateCrud {
         $metadata = $factory->getClassMetadata($entityClass)->getMetadata();
 
         $generator = new DoctrineCrudGenerator($this->container->get('filesystem'), realpath( __DIR__.'/../Resources/skeleton/crud'));
-        $generator->generate($this->bundle, $this->entity_name, $metadata[0], $this->entity_format, $prefix, $this->crud_with_write);
+        $generator->generate($this->bundle, $this->entity_name, $metadata[0], $this->entity_format, $prefix, $this->crud_with_write, $this->crud_overwrite);
 
         $formGenerator = new DoctrineFormGenerator($this->container->get('filesystem'), realpath( __DIR__.'/../Resources/skeleton/form'));
         $formGenerator->generate($this->bundle, $this->entity_name, $metadata[0]);
