@@ -12,8 +12,7 @@ class UsersControllerTest extends WebTestCase
      */
     protected function setUp()
     {
-        //mark test as skipped
-        $this->markTestSkipped('Teste funcional para a classe UsersController criado mas não ativo.');
+        $this->markTestIncomplete('Teste funcional para a classe UsersController criado mas não ativo.');
     }
     
     public function testCompleteScenario()

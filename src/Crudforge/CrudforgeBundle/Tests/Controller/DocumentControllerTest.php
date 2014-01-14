@@ -12,8 +12,7 @@ class DocumentControllerTest extends WebTestCase
      */
     protected function setUp()
     {
-        //mark test as skipped
-        $this->markTestSkipped('Teste funcional para a classe DocumentController criado mas não ativo.');
+        $this->markTestIncomplete('Teste funcional para a classe DocumentController criado mas não ativo.');
     }
     
     public function testCompleteScenario()

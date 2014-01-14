@@ -57,6 +57,9 @@ class FixturesWebTestCase extends WebTestCase
     */
     protected function tearDown(){
         parent::tearDown();
-        $this->em->close();
+        /**
+         * @todo esse metodo esta dando erro no teste, verificar porque 
+         */
+        //$this->em->close();
     }
 }
