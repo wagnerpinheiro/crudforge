@@ -46,10 +46,16 @@ class GenerateCrud {
     
     protected $crud_with_write = true;
     protected $crud_overwrite = true;
+    
+    protected $skeleton_dirs;
 
     public function __construct(ContainerInterface $container) {
         $this->container = $container;        
         $this->bundle = $this->container->get('kernel')->getBundle($this->bundle_name);
+        $this->skeleton_dirs = array(
+            __DIR__ . '/../Resources/skeleton',
+            __DIR__ . '/../Resources/skeleton/crud',
+        );
     }
 
     public function setDocument(Document $document){
@@ -66,6 +72,11 @@ class GenerateCrud {
         $this->generateCrud();
     }
     
+    /**
+     * cleanCrudCache
+     * Remove todos os arquivos previamente gerados
+     * @todo o correto seria alterar as demais funçoes que envolvem a geraçao de arquivos para que estes sejam reescritos
+     */
     protected function cleanCrudCache(){
         
         $bundle_root = $this->bundle->getPath();
@@ -89,7 +100,12 @@ class GenerateCrud {
 
         //{$bundle_root}/Resources/config/routing.yml        
     }
-            
+    
+    /**
+     * generateEntity
+     * Gera a entidade de acordo com o schema definido
+     * 
+     */
     protected function generateEntity(){
         /* verifica se arquivo existe */
         $generator =  new DoctrineEntityGenerator($this->container->get('filesystem'), $this->container->get('doctrine'));
@@ -131,25 +147,31 @@ class GenerateCrud {
     protected function setEntityOwner(){
         $security = new CrudforgeSecurity($this->container);
         $aclManager = $security->getAclManager();
-        $entityClass = $this->container->get('doctrine')->getEntityNamespace($this->bundle_name).'\\'.$this->entity_name;
+        $entityClass = $this->container->get('doctrine')->getAliasNamespace($this->bundle_name).'\\'.$this->entity_name;
         $aclManager->setClassPermission($entityClass, MaskBuilder::MASK_OWNER);        
     }
 
     /**
      * Generate Crud from Entity
+     * @see \Sensio\Bundle\GeneratorBundle\Command\GenerateDoctrineCrudCommand
+     * @see \Sensio\Bundle\GeneratorBundle\Command\GenerateDoctrineCommand
+     * @see \Sensio\Bundle\GeneratorBundle\Command\GeneratorCommand
+     * 
      */   
     protected function generateCrud(){
         
         //$prefix = 'user/' . $this->document->getUser()->getId() . '/' . $this->getRoutePrefix($this->entity_name);
         $prefix = $this->route_prefix;
-        $entityClass = $this->container->get('doctrine')->getEntityNamespace($this->bundle_name).'\\'.$this->entity_name;
+        $entityClass = $this->container->get('doctrine')->getAliasNamespace($this->bundle_name).'\\'.$this->entity_name;
         $factory = new MetadataFactory($this->container->get('doctrine'));
         $metadata = $factory->getClassMetadata($entityClass)->getMetadata();
 
-        $generator = new DoctrineCrudGenerator($this->container->get('filesystem'), realpath( __DIR__.'/../Resources/skeleton/crud'));
+        $generator = new DoctrineCrudGenerator($this->container->get('filesystem'));
+        $generator->setSkeletonDirs($this->skeleton_dirs);
         $generator->generate($this->bundle, $this->entity_name, $metadata[0], $this->entity_format, $prefix, $this->crud_with_write, $this->crud_overwrite);
 
-        $formGenerator = new DoctrineFormGenerator($this->container->get('filesystem'), realpath( __DIR__.'/../Resources/skeleton/form'));
+        $formGenerator = new DoctrineFormGenerator($this->container->get('filesystem'));
+        $formGenerator->setSkeletonDirs($this->skeleton_dirs);
         $formGenerator->generate($this->bundle, $this->entity_name, $metadata[0]);
         
         //não existe necessidade de criar uma rota 
