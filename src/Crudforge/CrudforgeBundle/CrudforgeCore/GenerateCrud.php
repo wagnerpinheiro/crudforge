@@ -52,10 +52,7 @@ class GenerateCrud {
     public function __construct(ContainerInterface $container) {
         $this->container = $container;        
         $this->bundle = $this->container->get('kernel')->getBundle($this->bundle_name);
-        $this->skeleton_dirs = array(
-            __DIR__ . '/../Resources/skeleton',
-            __DIR__ . '/../Resources/skeleton/crud',
-        );
+        $this->skeleton_dirs = $this->getSkeletonDirs();
     }
 
     public function setDocument(Document $document){
@@ -204,6 +201,25 @@ class GenerateCrud {
         $document = $em->getRepository('CrudforgeBundle:Document')->findOneBy(array('entity'=>$entity));
         return $document;
         
+    }
+    
+    protected function getSkeletonDirs()
+    {
+        $skeletonDirs = array();
+        
+        if (is_dir($dir = $this->bundle->getPath().'/Resources/CrudforgeBundle/skeleton')) {
+            $skeletonDirs[] = $dir;
+        }
+
+        if (is_dir($dir = $this->bundle->getPath().'/Resources/SensioGeneratorBundle/skeleton')) {
+            $skeletonDirs[] = $dir;
+        }
+
+        if (is_dir($dir = $this->container->get('kernel')->getRootdir().'/Resources/SensioGeneratorBundle/skeleton')) {
+            $skeletonDirs[] = $dir;
+        }
+        
+        return $skeletonDirs;
     }
     
 }

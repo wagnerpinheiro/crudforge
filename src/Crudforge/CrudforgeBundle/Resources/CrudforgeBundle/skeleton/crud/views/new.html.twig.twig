@@ -1,0 +1,14 @@
+{% block extends %}
+{{ "{% extends 'CrudforgeBundle::user.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+{{ "{% block body -%}" }}
+    <h2>{{"{{ document.name }}" }} - Novo</h2>
+
+    {{ '{{ form(form) }}' }}
+
+    {% set hide_edit, hide_delete = true, true %}
+    {% include 'crud/views/others/record_actions.html.twig.twig' %}
+{{ "{% endblock %}" }}
+{% endblock body %}

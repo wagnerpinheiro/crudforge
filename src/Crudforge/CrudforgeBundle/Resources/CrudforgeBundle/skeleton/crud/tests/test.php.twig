@@ -1,0 +1,34 @@
+<?php
+
+namespace {{ namespace }}\Tests\Controller{{ entity_namespace ? '\\' ~ entity_namespace : '' }};
+
+{% block use_statements %}
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+{% endblock use_statements %}
+
+{% block class_definition %}
+class {{ entity_class }}ControllerTest extends WebTestCase
+{% endblock class_definition %}
+{
+{% block class_body %}
+    
+    {% block setup_test %}
+    /**
+     * setup test
+     */
+    protected function setUp()
+    {
+        //mark test as skipped
+        $this->markTestSkipped('Teste funcional para a classe {{ entity_class }}Controller criado mas não ativo.');
+    }
+    {% endblock setup_test %}
+
+{%- if 'new' in actions %}
+    {%- include 'crud/tests/others/full_scenario.php.twig' -%}
+{%- else %}
+    {%- include 'crud/tests/others/short_scenario.php.twig' -%}
+{%- endif %}
+
+    
+{% endblock class_body %}
+}

@@ -1,0 +1,44 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Lists all {{ entity }} entities.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/", name="{{ route_name_prefix }}")
+     * @Method("GET")
+     * @Template()
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function indexAction()
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        $em = $this->getDoctrine()->getManager();
+        
+        {% block acl_check %}
+        $this->get('crudforge.security')->getAclManager()
+            ->checkGrantedClass('VIEW', $em->getRepository('{{ bundle }}:{{ entity }}')->getClassName());        
+        {% endblock acl_check %}
+
+        $entities = $em->getRepository('{{ bundle }}:{{ entity }}')->findAll();
+        $document = $this->get('crudforge.core')->getDocumentByEntity('{{entity}}');
+{% endblock method_body %}
+
+{% block method_return %}
+{% if 'annotation' == format %}
+        return array(
+            'entities' => $entities,
+            'document' => $document,
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:index.html.twig', array(
+            'entities' => $entities,
+            'document' => $document,
+        ));
+{% endif %}
+{% endblock method_return %}
+    }
