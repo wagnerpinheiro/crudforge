@@ -41,6 +41,13 @@ class Fields
      * @ORM\Column(name="length", type="integer", length=10, nullable=true)
      */
     private $length;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="nullable", type="boolean", nullable=true)
+     */
+    private $nullable;
 
     /**
      * @var integer
@@ -190,4 +197,27 @@ class Fields
         $name = preg_replace('/[^a-z0-9_]/i', '_', $name);        
         return $name;
     } 
+
+    /**
+     * Set nullable
+     *
+     * @param boolean $nullable
+     * @return Fields
+     */
+    public function setNullable($nullable)
+    {
+        $this->nullable = $nullable;
+
+        return $this;
+    }
+
+    /**
+     * Get nullable
+     *
+     * @return boolean 
+     */
+    public function getNullable()
+    {
+        return $this->nullable;
+    }
 }

@@ -28,6 +28,10 @@
             <th>Decimais</th>
             <td>{{ entity.scale }}</td>
         </tr>
+        <tr>
+            <th>Opcional</th>
+            <td><span class="{% if entity.nullable %}ui-icon ui-icon-circle-check{% endif %}"></span></td>
+        </tr>
     </tbody>
 </table>
 

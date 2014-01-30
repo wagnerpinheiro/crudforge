@@ -103,7 +103,8 @@ class GenerateCrud {
     /**
      * generateEntity
      * Gera a entidade de acordo com o schema definido
-     * 
+     * @see DoctrineEntityGenerator
+     * @see \Doctrine\ORM\Mapping\ClassMetadataInfo
      */
     protected function generateEntity(){
         /* verifica se arquivo existe */
@@ -115,7 +116,8 @@ class GenerateCrud {
                 'fieldName' => $field->getProperFieldName(), 
                 'type' => $field->getType(), 
                 'length' => $field->getLength(), 
-                'scale' => $field->getScale()
+                'scale' => $field->getScale(),
+                'nullable' => $field->getNullable()
             );
         }
 

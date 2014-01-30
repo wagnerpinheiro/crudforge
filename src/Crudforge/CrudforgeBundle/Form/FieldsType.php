@@ -35,6 +35,10 @@ class FieldsType extends AbstractType
                 'label'=>'decimais',
                 'required' => false                
             ))
+            ->add('nullable', 'checkbox', array(
+                'label'=>'opcional',
+                'required' => false                
+            ))
             ->add('document', 'entity_hidden', array(
                'class' => 'CrudforgeBundle:Document'
             ))
