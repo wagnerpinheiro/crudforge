@@ -67,6 +67,8 @@ class GenerateCrud {
         $this->setEntityOwner();
         $this->updateSchema();        
         $this->generateCrud();
+        $this->addRoute();
+        //$this->clearCache();
     }
     
     /**
@@ -171,16 +173,16 @@ class GenerateCrud {
         $formGenerator->setSkeletonDirs($this->skeleton_dirs);
         $formGenerator->generate($this->bundle, $this->entity_name, $metadata[0]);
         
-        //não existe necessidade de criar uma rota 
-        //visto que já existe rota para o tipo anotação de controller no routing.yml do app
         /*
         $routing = new RoutingManipulator($this->bundle->getPath().'/Resources/config/routing.yml');
         try {
-            $ret = $routing->addResource($this->bundle->getName(), $this->entity_format, '/'.$prefix, 'routing/'. $this->document->getRoute());
+            $ret = $routing->addResource($this->bundle->getName(), $this->entity_format, '/'. $prefix, 'routing/'. $this->document->getRoute());
         } catch (\RuntimeException $exc) {
             //die($exc->getTraceAsString());
             $ret = false;
-        }*/
+        }
+         * 
+         */
         
     }
 
@@ -222,6 +224,45 @@ class GenerateCrud {
         return $skeletonDirs;
     }
     
+    private function addRoute()
+    {
+        $file = $this->bundle->getPath().'/Resources/config/routing_start.yml';
+        $route = $this->document->getRoute();
+        $path = '/' . str_replace('_', '/', $this->document->getRoute()) . '/';
+        $controller = $this->document->getEntity();
+        $current = '';
+        if (file_exists($file)) {
+            $current = file_get_contents($file);
+
+            // Don't add same bundle twice
+            if (false !== strpos($current, $route)) {
+                //throw new \RuntimeException(sprintf('Route "%s" is already imported.', $route));
+                return false;
+            }
+        } elseif (!is_dir($dir = dirname($file))) {
+            mkdir($dir, 0777, true);
+        }
+
+        $code .= sprintf("%s:\n", $route);
+        $code .= sprintf("    path: %s\n", $path);
+        $code .= sprintf("    defaults:  { _controller: CrudforgeBundle:%s:index }\n", $controller);
+        $code .= "\n"; 
+        $code .= $current;
+
+        if (false === file_put_contents($file, $code)) {
+            return false;
+        }
+
+        return true;
+    }
+    
+    private function clearCache(){
+        $realCacheDir = $this->container->getParameter('kernel.cache_dir');
+        $this->container->get('cache_clearer')->clear($realCacheDir);
+        
+    }
+    
+        
 }
 
 ?>

@@ -243,11 +243,11 @@ class DocumentController extends Controller
         /**
          * @todo Redirect não esta funcionando, provavelmente pq é utilizado uma rota via anotação no controller do crud 
          */
-        //return $this->redirect($this->generateUrl($entity->getRoute()));
+        return $this->redirect($this->generateUrl($entity->getRoute()));
         
         //workaround
-        $response = $this->forward('CrudforgeBundle:' . $entity->getEntity() . ':index');        
-        return $response;
+        //$response = $this->forward('CrudforgeBundle:' . $entity->getEntity() . ':index');        
+        //return $response;
         
         //teste de gambiarra 1
         /*
@@ -255,8 +255,9 @@ class DocumentController extends Controller
             'prefix'=>$entity->getRoute(),
             'action'=>'redirect'
             )
-        ));         
-        */
+        ));
+         * 
+         */         
         
         //teste de gambiarra 2
         /*

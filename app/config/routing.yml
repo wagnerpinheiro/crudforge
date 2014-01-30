@@ -2,6 +2,12 @@ crudforge:
     resource: "@CrudforgeBundle/Controller/"
     type:     annotation
     prefix:   /
+    
+crudforge_routing:
+    resource: "@CrudforgeBundle/Resources/config/routing.yml"
+
+crudforge_routing_start:
+    resource: "@CrudforgeBundle/Resources/config/routing_start.yml"
 
 schemas:
     pattern: /schemas
@@ -10,8 +16,7 @@ schemas:
 schema:
     pattern: /schema/{document_id}
     defaults:  { _controller: CrudforgeBundle:Fields:list }
-    
-    
+  
 schema_action:
     pattern: /schema_action/{prefix}/{type}
     defaults:  { _controller: CrudforgeBundle:Document:getSchema }
