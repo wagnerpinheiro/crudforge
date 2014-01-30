@@ -67,7 +67,7 @@ class GenerateCrud {
         $this->setEntityOwner();
         $this->updateSchema();        
         $this->generateCrud();
-        $this->addRoute();
+        //$this->addRoute();
         //$this->clearCache();
     }
     

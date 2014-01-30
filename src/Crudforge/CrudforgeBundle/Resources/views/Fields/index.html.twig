@@ -8,7 +8,7 @@
         </a>
     </li>
     <li>
-        <a class="cssButton" href="{{ path('generate_crud', { 'id': document.id }) }}">gerar CRUD</a>
+        <a class="cssButton" href="{{ path('generate_crud', { 'id': document.id }) }}">atualizar CRUD</a>
     </li>
 </ul>
 <table class="records_list">
@@ -42,5 +42,13 @@
     {% endfor %}
     </tbody>
 </table>
+
+<br />
+<br />
+<ul>Dicas:
+    <li>Nessa tela estão listados os campos do seu schema, adicione os atributos do seu controle de dados como campos do schema e depois clique em <a href="{{ path('generate_crud', { 'id': document.id }) }}">atualizar CRUD</a>, para começar a utilizar o seu controle de dados. Por exemplo, para um schema Livros, geralmente você deseja controlar o autor, editora, ano de lançamento, etc...
+    </li>
+</ul>
+<br />
 
 {% endblock %}

@@ -107,6 +107,10 @@ class DocumentController extends Controller
             
             $aclManager = $this->get('crudforge.security')->getAclManager();
             $aclManager->setObjectPermission($entity, MaskBuilder::MASK_OWNER);
+
+            $core = $this->get('crudforge.core');
+            $core->setDocument($entity);
+            $core->generate();
             
             //return $this->redirect($this->generateUrl('document_show', array('id' => $entity->getId())));
             return $this->redirect($this->generateUrl('fields_list', array('document_id' => $entity->getId())));
@@ -176,7 +180,6 @@ class DocumentController extends Controller
             //adicionado temporariamente para gerar ACL dos schemas já cadastrados no ambiente dev, remover quando em produção
             $aclManager = $this->get('crudforge.security')->getAclManager();
             $aclManager->setObjectPermission($entity, MaskBuilder::MASK_OWNER);
-            
                         
         }
 

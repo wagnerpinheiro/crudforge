@@ -33,10 +33,7 @@
                     </li>
                     <li>
                         <a class="cssButton" href="{{ path('fields_list', { 'document_id': entity.id }) }}">adicionar campos</a>
-                    </li>
-                    <li>
-                        <a class="cssButton" href="{{ path('generate_crud', { 'id': entity.id }) }}">gerar CRUD</a>
-                    </li>
+                    </li>                    
                 </ul>
             </td>
         </tr>
@@ -47,8 +44,8 @@
 <br />
 <br />
 <ul>Dicas:
-    <li>Nessa tela estão listados todos os sesu schemas, você pode <a href="{{ path('document_new') }}">adicionar um novo</a> ou alterar um existente</li>
-    <li>Após adicionar campos no seu schema, utilize a função 'gerar CRUD' para começar a utilizar o seu CRUD</li>
+    <li>Nessa tela estão listados todos os seus schemas, você pode <a href="{{ path('document_new') }}">adicionar um novo schema</a> ou alterar um existente</li>
+    <li>Após adicionar campos no seu schema, utilize a função 'atualizar CRUD' para começar a utilizar o seu CRUD</li>
 </ul>
 <br />
 
