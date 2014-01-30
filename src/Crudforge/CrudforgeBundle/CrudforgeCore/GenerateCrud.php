@@ -67,7 +67,7 @@ class GenerateCrud {
         $this->setEntityOwner();
         $this->updateSchema();        
         $this->generateCrud();
-        $this->addRoute();
+        //$this->addRoute();
         //$this->clearCache();
     }
     
@@ -243,10 +243,10 @@ class GenerateCrud {
             mkdir($dir, 0777, true);
         }
 
-        $code .= sprintf("%s:\n", $route);
+        $code = sprintf("%s:\n", $route);
         $code .= sprintf("    path: %s\n", $path);
         $code .= sprintf("    defaults:  { _controller: CrudforgeBundle:%s:index }\n", $controller);
-        $code .= "\n"; 
+        $code .= "    methods:   [GET]\n\n"; 
         $code .= $current;
 
         if (false === file_put_contents($file, $code)) {
