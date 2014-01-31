@@ -25,6 +25,10 @@ share:
     pattern: /share/{document_id}
     defaults:  { _controller: CrudforgeBundle:Shares:list }
 
+home:
+    pattern: /home
+    defaults:  { _controller: CrudforgeBundle:Default:index }
+
 login:
     pattern: /login
     defaults:  { _controller: CrudforgeBundle:Default:login }

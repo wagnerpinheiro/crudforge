@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{ asset('bundles/crudforge/css/crudforge.css') }}" />
     </head>
     <body>
-        <h1 class="logo"><a href="/home" style="text-decoration:none;">CRUDForge</a></h1>
+        <div class="logo"><a href="{{ path('home') }}"><img height="36px" src="{{ asset('bundles/crudforge/img/crudforge_logo1.gif') }}"></a></div>
 
         <div id="main-menu">
         {% block mainmenu %}
