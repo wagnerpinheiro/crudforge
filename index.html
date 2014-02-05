@@ -8,81 +8,7 @@
 	<meta name="google-site-verification" content="XdcAuq3njMVbIj0w0nG0zm3K6OPoYdQiV9r3EPFg5kM" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-  	
-	<script>
-	$(function() {
-		$(document).tooltip({
-		  items: '[data-wikipedia]',
-		  //tooltipClass:'preview-tip',
-          content: function(callback) {
-		    var element = $(this);
-		    var text = element.attr('data-wikipedia');			
-			var url="http://en.wikipedia.org/w/api.php?action=parse&format=json&page=" + text+"&redirects&prop=text&callback=?";
-			  $.getJSON(url,function(data){
- 				  wikiHTML = data.parse.text["*"];
-				  //console.log(wikiHTML);
-				  callback(wikiHTML);					
-			  });		          
-		  }
-		});
-	  });
-  </script>
-
-<style>
-.ui-tooltip {    
-    border-radius: 5px;
-    font: x-small "Helvetica Neue", Sans-Serif;
-    box-shadow: 0 0 7px black;
-	max-width: 640px;	
-}
-
-.ui-tooltip h2{
-	font: bold x-small "Helvetica Neue", Sans-Serif;
-}
-
-.ui-tooltip .mw-headline{
-	font: bold x-small "Helvetica Neue", Sans-Serif;
-}
-
-.ui-tooltip .dablink{
-	display: none;
-}
-
-.ui-tooltip .editsection{
-	display: none;
-}
-
-.ui-tooltip .toc{
-	display: none;
-}
-
-.ui-tooltip .vertical-navbox{
-	display: none;
-}
-
-.ui-tooltip .ambox-Refimprove{
-	display: none;
-}
-
-.ui-tooltip .ambox-Original_research{
-	display: none;
-}
-
-
-.ui-tooltip .seealso{
-	display: none;
-}
-
-.ui-tooltip img{
-	display: none;
-}
-
-</style>
-
-    <title>CRUDForge</title>
+	<title>CRUDForge</title>
   </head>
 
   <body>
@@ -90,120 +16,18 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/wagnerpinheiro/crudforge">View on GitHub</a>
-			<img class="logo" src="images/crudforge_logo.png" />
-
-          <h1 id="project_title">CRUDForge</h1>
-          <h2 id="project_tagline">Make SOLID Data</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/wagnerpinheiro/crudforge/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/wagnerpinheiro/crudforge/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+		  <img src="images/crudforge_logo1.gif" />          
+		</header>
     </div>
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1>CRUDForge Project</h1>
 
-<p>Plataforma para gestão de dados de forma colaborativa e extensível de alto nível:</p>
+<p>Plataforma Geradora de Aplicações Online, Colaborativa e Extensível</p>
 
-<ol>
-<li>Compartilhamento de Schemas <a target="_blank" href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete" data-wikipedia="Create,_read,_update_and_delete">CRUD</a>;</li>
-<li>Compartilhamento de dados;</li>
-<li>Sistema de gestão para PME (pequenas e médias empresas), altamente customizado e de acordo com as necessidades;</li>
-</ol><h2>Contexto</h2>
+<p>Solicite um acesso ao demo online pelo email: <a href="mailto:demo@crudforge.com.br">demo[at]crudforge.com.br</a></p>
 
-<h3>Visão</h3>
+<p><a id="forkme_banner" href="https://github.com/wagnerpinheiro/crudforge">View on GitHub</a></p>
 
-<ul>
-<li>subir o nível de abstração para o desenvolvimento de aplicativos online e com funcionalidades prontas de <a target="_blank" href="http://en.wikipedia.org/wiki/Enterprise_resource_planning" data-wikipedia="Enterprise_resource_planning">ERP</a>; </li>
-<li>usuário final: 
-
-<ol>
-<li>qualquer pessoa que queira estruturar e compartilhar dados;</li>
-<li>gestor de PME que conhece o seu negócio, e que por restrições financeiras ou operacionais não tenha interesse em um ERP, mas quer ir além do que gerenciar o seu negócio apenas com planilhas, alguém que queira gerar um diferencial competitivo, disponibilizando dados para os seus clientes e aumentando a produtividade em um ambiente multi-usuário descentralizado e controlado;</li>
-</ol>
-</li>
-<li>o CRUDForge não tem a intenção de ser um ERP, pois o usuário final em seu contexto comercial, é o gestor que entende do seu negócio e nesse caso não faz sentido provermos uma solução rígida que ele deve seguir para obter resultados, ao invés disso queremos prover uma plataforma para que ele desenvolva ou seus conceitos livremente, sem ficar atado ao que já existe. Não queremos moldar o usuário, e sim moldar uma infraestrutura sólida de apoio para os seus negócios.</li>
-</ul><h3>Conceitos</h3>
-
-<ul>
-<li><a target="_blank" haref="http://en.wikipedia.org/wiki/KISS_principle" data-wikipedia="KISS_principle">KISS</a>, <a target="_blank" href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself" data-wikipedia="Don%27t_repeat_yourself">DRY</a>, <a target="_blank" href="http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)" data-wikipedia="SOLID_(object-oriented_design)">SOLID</a> (mantenha simples, não se repita, manter e estender de forma simples);</li>
-<li>implementar CRUD e Relatórios para que o usuário final realize o desenvolvimento <a target="_blank" href="http://en.wikipedia.org/wiki/Rapid_application_development" data-wikipedia="Rapid_application_development">RAD</a> e gere aplicações <a target="_blank" href="http://en.wikipedia.org/wiki/Rich_Internet_application" data-wikipedia="Rich_Internet_application">RIA</a>;</li>
-</ul><h3>TCC</h3>
-
-<p>O CRUDForge é a idealização de um projeto para o TCC do curso de Engenharia da Computação.
-Considerações:</p>
-
-<ul>
-<li>foco na arquitetura da plataforma:
-
-<ul>
-<li>especificação e integração dos serviços, frameworks e bibliotecas;</li>
-<li>arquitetura SOA;</li>
-</ul>
-</li>
-<li>apoiado sobre a engenharia de software:
-
-<ul>
-<li>gestão de projeto;</li>
-<li>desenvolvimento ágil;</li>
-<li>modelagem UML;</li>
-<li>testes;</li>
-</ul>
-</li>
-</ul><p>O CRUDForge não é:</p>
-
-<ul>
-<li>Um aplicativo;</li>
-<li>Um plugin;</li>
-<li>Uma biblioteca;</li>
-<li>Um framework;</li>
-<li>Um ERP;</li>
-</ul><p>CRUDForge é uma <a target="_blank" href="http://webinsider.uol.com.br/2012/03/01/plataforma-de-software-voce-ainda-vai-usar-uma/">plataforma</a> de implantação simples via <a target="_blank" href="http://en.wikipedia.org/wiki/Virtual_appliance" data-wikipedia="Virtual_appliance">Virtual Appliance</a>. Sendo este virtual appliance um protótipo que será entregue ao final do TCC, junto com as especificações e o desenvolvimento dos conceitos por trás da plataforma.</p>
-
-<h3>Casos de uso</h3>
-
-<ol>
-<li>TO-DO list: Imagine que você queira montar uma lista de tarefas e compartilhar com a sua família, para isso você define o CRUD através de uma interface amigável e cria um relatório para que as pessoas dentro do seu ACL possam ver essas tarefas. Você pode criar um campo chamado categoria, onde dependendo do seu valor os usuários dentro do seu ACL terão ou não a visibilidade daquela tarefa;</li>
-<li>Compartilhamento de inventário: o usuário pode montar um schema CRUD, para que seja lançado as informações por exemplo da sua coleção de DVD, e a partir dele criar um relatório através de um template onde será publicado uma página publica, onde qualquer amigo seu possa ver quais os DVDs ele possui;</li>
-<li>Contas a pagar e receber: CRUD para implementar um controle de contas a pagar e receber básico utilizado em qualquer empresa. O usuário pode estender esse CRUD adicionando campos que fazem sentido para a empresa dele ou removendo outros campos;</li>
-<li>Controle básico de estoque: CRUD para o lançamento de baixa e controle de estoque;</li>
-<li>Gestão simples de varejo: Tendo os módulos 3 e 4 disponíveis, o usuário pode agregar esses schemas (dentre outros) na sua conta, e com isso montar um pequeno sistema de gestão para a sua loja de varejo;</li>
-</ol>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">
-		CRUDForge é mantido por:
-		<ul>
-		<li><a href="https://github.com/livarhora">Livar Hora</a></li>
-		<li><a href="https://github.com/neoold">Victor Arpa Bock</a></li>
-		<li><a href="https://github.com/wagnerpinheiro">Wagner Pinheiro</a></li>
-		<li><a href="https://github.com/williancarareto">Willian Carareto</a></li>
-		</ul>        
-		</p>
-        
-      </footer>
-    </div>
-
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-39553392-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-
-  </body>
 </html>
