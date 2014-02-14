@@ -8,7 +8,7 @@ description: ""
 ---
 {% include JB/setup %}
 
-O CRUDForge nasceu como um projeto de TCC do curso de Engenharia da Computação, tendo como integrantes:
+O CRUDForge nasceu como um projeto de TCC do curso de Engenharia da Computação da [Unifieo](http://www.unifieo.br), tendo como integrantes:
 * Livar Alves da Hora
 * Victor Arpa Bock
 * Wagner Pinheiro
