@@ -20,6 +20,6 @@ Plataforma Geradora de Aplicações Online, Colaborativa e Extensível
 ---
 
 <br />
-<center><a class="btn btn-default btn-sm" href="mailto:demo@crudforge.com.br">Entre em contato para maiores informações ou para solicitar acesso ao demo online</a></center>
+<center><a class="btn btn-default btn-sm" href="mailto:demo@crudforge.com.br">Entre em contato para maiores informações ou para solicitar acesso ao demo online exclusivo</a></center>
 <br />
 
