@@ -8,10 +8,10 @@ group: navigation
 {% include JB/setup %}
 
 Estamos trabalhando para colocar a plataforma [CRUDForge](/) em produção, até lá você pode testar 
-as funcionalidades no nosso [servidor de testes](http://demok.crudforge.com.br/home):
+as funcionalidades no nosso servidor de testes:
 
 
->url: [http://demok.crudforge.com.br/home](http://demok.crudforge.com.br/home)
+>url: <a href="http://demok.crudforge.com.br/home" onClick="_gaq.push(['_trackEvent', 'demo', 'play', 'testar demo', 1]);">http://demok.crudforge.com.br/home</a>
 
 >usuários disponíveis: demo, user1, user2, user3
 
