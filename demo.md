@@ -7,7 +7,7 @@ group: navigation
 ---
 {% include JB/setup %}
 
-Estamos trabalhando para colocar a plataforma CRUDForge em produção, até lá você pode testar 
+Estamos trabalhando para colocar a plataforma [CRUDForge](/) em produção, até lá você pode testar 
 as funcionalidades no nosso [servidor de testes](http://demok.crudforge.com.br/home):
 
 
