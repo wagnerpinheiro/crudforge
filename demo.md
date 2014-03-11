@@ -13,9 +13,9 @@ as funcionalidades no nosso [servidor de testes](http://demok.crudforge.com.br/h
 
 >url: [http://demok.crudforge.com.br/home](http://demok.crudforge.com.br/home)
 
->usuário: demo
+>usuários disponíveis: demo, user1, user2, user3
 
->senha: crudforge
+>senha (comum a todos os usuários): crudforge
 
 Se o servidor estiver offline ([verifique aqui](http://www.isitdownrightnow.com/demok.crudforge.com.br.html)) ou caso você tenha algum dificuldade, entre em contato por <a href="mailto:demo@crudforge.com.br">email</a> ou utilize o nosso formulário para registro de ocorrência ([issues tracking](issues.html)), que estaremos prontos para lhe atender.
 
