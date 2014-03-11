@@ -15,4 +15,4 @@ O CRUDForge nasceu como um projeto de TCC do curso de Engenharia da Computação
 * [Willian Carareto](http://br.linkedin.com/pub/willian-carareto/58/1b4/13b)
 
 <br />
-<a href="downloads/tcc-crudforge.pdf" class="btn .btn-small btn-primary">Leia na integra a nossa tese de graduação</a>
+<a href="downloads/tcc-crudforge.pdf" class="btn .btn-small btn-primary" onClick="_gaq.push(['_trackEvent', 'doc', 'view', 'ver documento', 1]);">Leia na integra a nossa tese de graduação</a>
